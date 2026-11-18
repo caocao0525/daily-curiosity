@@ -239,7 +239,7 @@ nav a.active{background:#23665c;color:#fff;border-color:#23665c}
 footer{font-size:.8rem;color:#68736e;margin-top:40px}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
 .filters input{font:inherit;color:inherit;background:transparent;border:1px solid #a9b6ae;border-radius:8px;padding:10px;min-width:0}
-.filters input[type=search]{flex:2 1 230px}.filters input[type=date]{flex:1 1 170px}
+.filters input[type=search]{flex:2 1 230px}.filters input[type=date]{flex:1 1 170px}.filters button{font:inherit;border:1px solid #a9b6ae;color:inherit;background:transparent;border-radius:8px;padding:9px 12px;cursor:pointer}.filters button:hover{border-color:#23665c}
 .date-heading{margin:28px 0 8px;font-size:1rem}
 .archive-count{font-size:.85rem;color:#68736e}
 @media(prefers-color-scheme:dark){
@@ -336,6 +336,7 @@ def render_archive(issues):
         '<div class="filters">'
         '<input id="search" type="search" placeholder="Search keywords or topics…" aria-label="Search archive">'
         '<input id="date" type="date" aria-label="Filter by date">'
+        '<button id="clear-date" type="button">Clear date</button>'
         '</div>'
         f'<p id="count" class="archive-count">{total} stories archived</p>'
         + "\n".join(cards)
@@ -363,6 +364,8 @@ def render_archive(issues):
  }
  search.addEventListener('input',update);
  date.addEventListener('input',update);
+ document.getElementById('clear-date').addEventListener('click',()=>{date.value='';update();});
+ update();
 })();
 </script>"""
     )
@@ -389,14 +392,29 @@ def main():
     seen = {url: day for url, day in seen.items()
             if day >= (now.date() - dt.timedelta(days=60)).isoformat()}
 
-    candidates = collect()
-    print(f"Total unique candidates: {len(candidates)}")
-    selected = choose_and_summarize(candidates, seen)
+    # The first successful briefing of each date is the permanent edition.
+    # Subsequent manual reruns rebuild pages without collecting or calling the API.
+    daily_file = issue_dir / f"{today}.json"
+    if daily_file.exists():
+        issue = json.loads(daily_file.read_text(encoding="utf-8"))
+        if issue.get("date") != today or not isinstance(issue.get("items"), list):
+            raise ValueError(f"Invalid saved daily briefing: {daily_file}")
+        selected = issue["items"]
+        print(f"Reusing first briefing for {today}; no new API request.")
+    else:
+        candidates = collect()
+        print(f"Total unique candidates: {len(candidates)}")
+        selected = choose_and_summarize(candidates, seen)
+        issue = {"date": today, "items": selected}
+        daily_file.write_text(
+            json.dumps(issue, ensure_ascii=False, indent=2), encoding="utf-8")
+        for item in selected:
+            seen[item["url"]] = today
+        seen_file.write_text(
+            json.dumps(seen, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"Created first briefing for {today}.")
 
-    issue = {"date": today, "items": selected}
     (DATA / "latest.json").write_text(
-        json.dumps(issue, ensure_ascii=False, indent=2), encoding="utf-8")
-    (issue_dir / f"{today}.json").write_text(
         json.dumps(issue, ensure_ascii=False, indent=2), encoding="utf-8")
 
     historical = []
@@ -412,9 +430,6 @@ def main():
         (site_issue_dir / f'{old_issue["date"]}.html').write_text(
             render(old_issue, archived=True), encoding="utf-8")
 
-    for item in selected:
-        seen[item["url"]] = today
-    seen_file.write_text(json.dumps(seen, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Published {len(selected)} cards on {today}; {len(historical)} archived editions")
 
 
