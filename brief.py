@@ -72,6 +72,7 @@ def pubmed(topic, cap):
     response.raise_for_status()
     entries = response.json().get("result", {})
     abstracts = {}
+    online_dates = {}
     try:
         xml_response = SESSION.get(base + "efetch.fcgi", params={"db": "pubmed", "id": ",".join(pmids), "retmode": "xml", "tool": "daily_curiosity"}, timeout=35)
         xml_response.raise_for_status()
@@ -87,6 +88,16 @@ def pubmed(topic, cap):
                 if segment:
                     sections.append((prefix + ": " if prefix else "") + segment)
             abstracts[node.text] = " ".join(sections)[:3000]
+            # An online release can precede the journal issue/eCollection date.
+            dates = [n for n in article.findall(".//Article/ArticleDate") if n.attrib.get("DateType", "").lower() == "electronic"]
+            dates += [n for n in article.findall(".//PubmedData/History/PubMedPubDate") if n.attrib.get("PubStatus", "").lower() in ("epublish", "aheadofprint")]
+            for date_node in dates:
+                y, m, d = (date_node.findtext(k, "") for k in ("Year", "Month", "Day"))
+                try:
+                    online_dates[node.text] = dt.date(int(y), int(m), int(d)).isoformat()
+                    break
+                except (ValueError, TypeError):
+                    pass
     except (requests.RequestException, ET.ParseError) as exc:
         print(f"WARNING: PubMed abstracts unavailable: {exc}", file=sys.stderr)
     output = []
@@ -97,7 +108,7 @@ def pubmed(topic, cap):
         journal = record.get("fulljournalname", "PubMed")
         output.append({"title": tidy(record.get("title", "")), "url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
                        "summary": (f"Journal: {journal}. Abstract: {abstracts[pmid]}" if abstracts.get(pmid) else f"Journal: {journal}. Title/metadata only; abstract unavailable."),
-                       "published": record.get("pubdate", ""), "source": "PubMed citation", "topic": topic["name"]})
+                       "published": online_dates.get(pmid, record.get("pubdate", "")), "source": "PubMed citation", "topic": topic["name"]})
     return output
 
 
@@ -116,10 +127,11 @@ def iso_date(value):
 def age_ok(value, days):
     try:
         published = dt.date.fromisoformat(value[:10])
-        return dt.date.today() - dt.timedelta(days=days) <= published <= dt.date.today() + dt.timedelta(days=1)
+        today = dt.datetime.now(ZoneInfo(CONFIG["timezone"])).date()
+        return today - dt.timedelta(days=days) <= published <= today
     except (ValueError, TypeError):
-        # PubMed sometimes offers year/month only; let model know date is uncertain.
-        return True
+        # Unknown publication date is not evidence of recency.
+        return False
 
 
 def collect():
@@ -153,8 +165,8 @@ def choose_and_summarize(candidates, seen):
     # Minimize prompt size and prevent unrelated data from entering the prompt.
     payload = [{"id": i, **{k: v for k, v in x.items() if k in ("title", "summary", "published", "source", "topic", "group")}}
                for i, x in enumerate(available)]
-    system = """You are a careful scientific editor producing an accessible daily Korean briefing for a computational genomics researcher who likes neuroscience, evolutionary psychology, physics, math, and fine art.
-Select up to the requested count, preferring strong relevance, methodological novelty, source diversity, and reasonably recent substantive news. Allocate roughly 3 research and 3 general, but NEVER pad with low-quality stories. Do not repeat the same development across sources. Only use evidence in the supplied title/snippet/abstract. Don't imply you read a full paper. For PubMed entries with only metadata and no abstract, do NOT invent methods or results: omit them unless the title alone is clearly relevant and summarize only what the title supports. For preprints label uncertainty; for psychology avoid causal overstatement. For media headlines avoid extrapolation beyond snippet. Write fluent, concrete, very concise Korean. Return JSON with top-level key 'items', an array of {id, headline, summary, why, evidence_note}. Every item: headline <=90 Korean characters; summary 1-2 short Korean sentences containing concrete problem/approach/finding when supported; why <=1 short sentence; evidence_note short caution such as '프리프린트' or '제목 기반 정보' (empty if no special caveat). Prefer breadth across general topics across days. Do not include external links in JSON; source urls will be inserted from trusted input."""
+    system = """You are a rigorous scientific editor preparing an English-first daily reading digest for a computational genomics researcher interested in neuroscience, evolutionary psychology, physics, mathematics, and fine art. Select up to 3 directly relevant research stories and 3 genuinely interesting general stories, never padding with unrelated material. For research, demand substantial relevance to computational genomics, epigenomics, chromatin, regulatory elements, biological foundation models, or broadly transferable ML methods. Reject unrelated clinical imaging, medical diagnoses, nanomaterials and generic biomedical items even if the search engine returned them. Aim for subject diversity among general stories. Use ONLY supplied titles, abstracts, RSS snippets and metadata, never invent methods or results. Label preprints and uncertainties, especially in psychology and news. Remember publication online and the future journal issue/eCollection date can differ. Write clear concise English primarily and a short Korean supplementary takeaway.
+Return JSON object with key items, an array of {id, headline, summary, why, korean, evidence_note}. Headline: concise descriptive English. Summary: 2-3 short specific English sentences explaining problem, approach, findings where source allows. Why: one English sentence on its actual significance, no empty hype. Korean: one short Korean sentence summarizing the idea, NOT a lengthy translation. Evidence_note: short English caution if warranted, else empty. No links in JSON."""
     user = {"target_total": CONFIG["max_items"], "research_target": CONFIG["research_target"], "general_target": CONFIG["general_target"], "candidates": payload}
     request = {"model": CONFIG["model"], "temperature": 0.2,
                "response_format": {"type": "json_object"},
@@ -166,6 +178,8 @@ Select up to the requested count, preferring strong relevance, methodological no
     result = json.loads(response.json()["choices"][0]["message"]["content"])
     selected = []
     chosen = set()
+    group_counts = {"research": 0, "general": 0}
+    group_targets = {"research": CONFIG["research_target"], "general": CONFIG["general_target"]}
     for row in result.get("items", []):
         try:
             idx = int(row["id"])
@@ -173,10 +187,15 @@ Select up to the requested count, preferring strong relevance, methodological no
             continue
         if idx not in range(len(available)) or idx in chosen:
             continue
-        chosen.add(idx)
         original = available[idx]
+        group = original["group"]
+        if group_counts[group] >= group_targets[group]:
+            continue
+        chosen.add(idx)
+        group_counts[group] += 1
         selected.append({**original, "headline": str(row.get("headline", original["title"]))[:180],
                          "brief": str(row.get("summary", ""))[:1000], "why": str(row.get("why", ""))[:500],
+                         "korean": str(row.get("korean", ""))[:350],
                          "evidence_note": str(row.get("evidence_note", ""))[:120]})
         if len(selected) >= CONFIG["max_items"]:
             break
@@ -189,16 +208,17 @@ def render(issue):
     cards = []
     for item in issue["items"]:
         cards.append(f'''<article class="card"><div class="meta"><span>{esc(item['topic'])}</span><span>{esc(item['source'])} · {esc(item['published'])}</span></div>
-<h2>{esc(item['headline'])}</h2><p>{esc(item['brief'])}</p><p class="why"><b>왜 읽을까?</b> {esc(item['why'])}</p>
+<h2>{esc(item['headline'])}</h2><p>{esc(item['brief'])}</p><p class="why"><b>Why it matters</b> {esc(item['why'])}</p>
+{f'<p class="ko"><b>한국어 요약</b> {esc(item.get("korean", ""))}</p>' if item.get("korean") else ""}
 {f'<p class="caution">{esc(item["evidence_note"])}</p>' if item['evidence_note'] else ''}
-<a href="{esc(item['url'])}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a></article>''')
+<a href="{esc(item['url'])}" target="_blank" rel="noopener noreferrer">Read original ↗</a></article>''')
     content = '\n'.join(cards) if cards else '<p>오늘은 선정된 소식이 없어요. 새로운 자료가 없거나 출처 수집에 문제가 있었을 수 있습니다.</p>'
-    return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(CONFIG['title'])} · {esc(issue['date'])}</title><style>
 :root{{color-scheme:light dark}}body{{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;max-width:760px;margin:0 auto;padding:32px 18px 80px;line-height:1.65;background:#fafaf8;color:#242726}}
-a{{color:#23665c}}header{{padding-bottom:18px;border-bottom:1px solid #d8dedc}}h1{{font-size:2.1rem;margin:0}}header p,.meta,.caution{{color:#68736e}}.subtitle{{margin:2px 0 12px}}.card{{background:white;border:1px solid #e4e8e5;border-radius:14px;padding:21px;margin:17px 0}}.card h2{{font-size:1.18rem;line-height:1.4;margin:11px 0}}.meta{{display:flex;gap:12px;justify-content:space-between;font-size:.78rem;flex-wrap:wrap}}.why{{border-left:3px solid #84a69b;padding-left:12px}}.caution{{font-size:.78rem}}footer{{font-size:.8rem;color:#68736e;margin-top:40px}}@media(prefers-color-scheme:dark){{body{{background:#151a18;color:#e8efec}}.card{{background:#202724;border-color:#38473f}}header{{border-color:#38473f}}a{{color:#9bd8c0}}}}
-</style></head><body><header><h1>☀️ {esc(CONFIG['title'])}</h1><p class="subtitle">10분 지식 브리핑 · {esc(issue['date'])}</p><p>Research × Curiosity · {len(issue['items'])} stories</p></header>
-<main>{content}</main><footer>요약은 각 원문의 메타데이터·초록·RSS 발췌에 기반한 자동 생성물입니다. 중요 결과는 반드시 원문에서 확인하세요.</footer></body></html>'''
+a{{color:#23665c}}header{{padding-bottom:18px;border-bottom:1px solid #d8dedc}}h1{{font-size:2.1rem;margin:0}}header p,.meta,.caution{{color:#68736e}}.subtitle{{margin:2px 0 12px}}.card{{background:white;border:1px solid #e4e8e5;border-radius:14px;padding:21px;margin:17px 0}}.card h2{{font-size:1.18rem;line-height:1.4;margin:11px 0}}.meta{{display:flex;gap:12px;justify-content:space-between;font-size:.78rem;flex-wrap:wrap}}.why{{border-left:3px solid #84a69b;padding-left:12px}}.ko{{font-size:.9rem;color:#68736e;background:#f2f5f3;border-radius:8px;padding:12px 14px}}.caution{{font-size:.78rem}}footer{{font-size:.8rem;color:#68736e;margin-top:40px}}@media(prefers-color-scheme:dark){{body{{background:#151a18;color:#e8efec}}.card{{background:#202724;border-color:#38473f}}.ko{{background:#26312b;color:#c6d7cd}}header{{border-color:#38473f}}a{{color:#9bd8c0}}}}
+</style></head><body><header><h1>☀️ {esc(CONFIG['title'])}</h1><p class="subtitle">Your 10-minute knowledge briefing · {esc(issue['date'])}</p><p>Research × Curiosity · {len(issue['items'])} stories</p></header>
+<main>{content}</main><footer>Summaries are generated from abstracts, metadata and RSS excerpts. Verify important claims in original sources.</footer></body></html>'''
 
 
 def main():
