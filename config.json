@@ -1,0 +1,22 @@
+{
+  "title": "The Daily Curiosity",
+  "timezone": "America/New_York",
+  "language": "Korean",
+  "max_items": 6,
+  "research_target": 3,
+  "general_target": 3,
+  "max_days_old": 7,
+  "max_candidates_per_source": 18,
+  "model": "gpt-4.1-mini",
+  "research_topics": [
+    {"name": "Genomics & Epigenomics", "source": "pubmed", "query": "(epigenomics OR chromatin state OR enhancer OR gene regulation OR functional genomics) AND (machine learning OR deep learning OR computational)"},
+    {"name": "Biological Foundation Models", "source": "arxiv", "query": "all:\"genomics\" AND all:\"foundation model\""},
+    {"name": "AI / ML Methods", "source": "arxiv", "query": "cat:cs.LG AND (all:\"representation learning\" OR all:\"interpretability\")"}
+  ],
+  "general_topics": [
+    {"name": "Neuroscience & Evolutionary Psychology", "source": "pubmed", "query": "(neuroscience OR cognitive neuroscience OR evolutionary psychology OR social cognition OR decision making)"},
+    {"name": "Physics", "source": "arxiv", "query": "cat:physics.gen-ph OR cat:quant-ph OR cat:astro-ph.CO"},
+    {"name": "Mathematics", "source": "arxiv", "query": "cat:math.HO OR cat:math.PR OR cat:math.DS"},
+    {"name": "Art & Art History", "source": "google_news_rss", "query": "(art exhibition OR art history OR museum OR auction) when:7d"}
+  ]
+}
