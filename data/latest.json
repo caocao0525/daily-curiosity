@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-18",
+  "items": [
+    {
+      "title": "Computational and experimental analysis for the mismatched DNA recognition mechanism of TaqMutS.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43022993/",
+      "summary": "Journal: Synthetic and systems biotechnology. Abstract: DNA holds great potential as a next-generation information storage material due to its high density, stability and low energy consumption. However, high synthesis errors severely limit its practical implementation. Enzymatic error correction based on Thermus aquaticus MutS (TaqMutS) is efficient and straightforward, whereas its severe non-specific binding to perfectly matched DNA drastically decreases the correction performance. In this work, we systematically analyzed the mechanism of mismatched DNA recognition by TaqMutS through alanine scanning mutagenesis, homologous substitution mutations and molecular dynamics simulations. The results revealed that TaqMutS recognized mismatched sites by sensing the local conformational strain of DNA. Specifically, a cooperative push-pull mechanism mediated by residues S57 and D472 modulated the π-stacking interactions between the key recognition residue F39 and DNA. Meanwhile, the electrostatic synergistic effects of residues K61 and R473 effectively regulated the non-specific DNA binding of TaqMutS. Based on these findings, two mutants (V57S and K61H) were constructed, which exhibited enhanced binding efficiency for mismatched DNA and reduced affinity for perfectly matched DNA. Collectively, this study provided useful error-correction tools for high-efficiency DNA synthesis and laid an important theoretical foundation for the rational design of mismatched DNA recognition proteins.",
+      "published": "2027 May",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "TaqMutS 단백질의 불일치 DNA 인식 메커니즘 규명",
+      "brief": "TaqMutS가 DNA 불일치 부위를 국소 구조 변형으로 인식하는 푸시-풀 메커니즘과 전기적 상호작용을 밝혀냈다. 변이체 V57S, K61H는 불일치 DNA 결합 효율을 높이고 완전 일치 DNA 결합은 줄였다.",
+      "why": "DNA 합성 오류 교정 효율 향상과 불일치 인식 단백질 설계에 기초를 제공한다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Prototype-Guided Test-Time Adaptation for Real-Time EMG-Based Gesture Recognition.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42855826/",
+      "summary": "Journal: International journal of neural systems. Abstract: Surface electromyography (sEMG) signals facilitate intuitive human-machine interaction and are widely employed in applications such as prosthetics and rehabilitation. However, sEMG signal distributions are highly sensitive to variations in electrode placement, user physiology, and session conditions, which significantly hinder model generalization in real-world settings. To address this, we propose EMG-based structure-aware test-time adaptive refinement (EMG-STAR), a test-time adaptation (TTA) framework tailored for online deployment without access to target data during training. EMG-STAR improves model stability by fusing historical and batch-wise normalization statistics from both source and target domains, effectively alleviating domain shifts. Furthermore, it refines predictions using a prototype-assisted feature clustering method that enforces consistency among semantically similar target samples. To further enhance reliability, the framework jointly leverages prediction confidence and distributional alignment to filter out noisy pseudo-labels during adaptation. Comprehensive evaluations conducted on two public datasets, Hyser, and NinaPro-DB2, demonstrate that EMG-STAR consistently outperforms ten existing TTA methods. Interpretability analysis using Grad-CAM reveals that EMG-STAR predominantly attends to physiologically meaningful muscle activation regions, suggesting that the model captures neuromuscular structures rather than transient signal noise.",
+      "published": "2027 Apr",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "EMG-STAR: 실시간 근전도 기반 제스처 인식용 테스트 시점 적응 프레임워크",
+      "brief": "EMG-STAR는 온라인 환경에서 전이 문제를 완화하며, 예측 신뢰도와 분포 정렬을 활용해 노이즈 라벨을 걸러낸다. 공개 데이터셋에서 기존 방법 10종 대비 일관된 성능 향상을 보였다.",
+      "why": "신경근 구조를 반영해 실제 적용 가능한 근전도 신호 인식 안정성을 높인다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Neural Stability Enhancement Through Dynamic Lipschitz Constraints in Generative Adversarial Networks.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42715211/",
+      "summary": "Journal: International journal of neural systems. Abstract: Generative adversarial networks (GANs) are widely used for generative modeling in neural networks, yet their practical use is hindered by training instability and mode collapse. Existing stabilization approaches predominantly rely on enforcing fixed 1-Lipschitz constraints on the discriminator through techniques such as gradient penalty, spectral normalization, and gradient normalization. However, these methods fail to account for the dynamic nature of neural network training, where the appropriate Lipschitz constant target may vary with evolving system dynamics. This work challenges the conventional fixed-constraint paradigm by formalizing how the effective constraint strength and a bound-implied Lipschitz constant target can depend on architecture and training state. We provide theoretical analysis to motivate adaptive Lipschitz constraint (ALC) control and introduce ALC, a modular mechanism that adjusts the Lipschitz constant target rather than introducing another standalone regularization term. Experiments across multiple stable GAN architectures show improvements in generation quality and training stability in several evaluated settings. Our contributions advance the understanding of neural system stability in adversarial learning and provide a practical approach to ALC control in adversarial objectives.",
+      "published": "2027 Apr",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "GAN 훈련 안정성 향상을 위한 동적 Lipschitz 제약 도입",
+      "brief": "기존 고정 1-Lipschitz 제약 대신, 신경망 훈련 상태에 따라 Lipschitz 상수를 적응적으로 조절하는 ALC 기법을 제안했다. 여러 GAN 아키텍처에서 생성 품질과 훈련 안정성이 개선되었다.",
+      "why": "적응적 제약으로 GAN의 모드 붕괴와 불안정 문제를 완화한다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Predicting IGD treatment outcomes across interventions using a whole-brain functional connectome biomarker.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42862599/",
+      "summary": "Journal: Dialogues in clinical neuroscience. Abstract: BACKGROUND: Although treatment approaches have been explored in internet gaming disorder (IGD), however, little is known about the specific neural activity that is associated with treatment outcomes. This study aims to establish a treatment-sensitive network that reliably predicts treatment outcomes across different interventions for IGD. METHODS: Resting-state fMRI data were collected from 90 individuals with IGD who received one of three different intervention protocols (mindfulness meditation, approach bias modification, or retrieval-aversive conditioning training). Connectome-based predictive modelling (CPM) was used to build a treatment-sensitive network to predict individual symptom reduction, then validated them on the external dataset. RESULTS: The negative (r = 0.401, p <.001) and combined network (r = 0.480, p <.001) can significantly predict a reduction of addiction severity (baseline minus post-test). Specifically, the negative network was primarily centred on the motor, subcortical, and salience networks. The positive network primarily involved cerebellar-related connections. Incorporating these into a combined model significantly improved predictive accuracy, suggesting that cerebellar-related connectivity may contribute to the prediction of intervention-related clinical improvement. Finally, the treatment-sensitive network was validated in a separate data. CONCLUSIONS: This study established a treatment-sensitive network based on the whole-brain connectome. These findings provide valuable empirical evidence for identifying biomarkers for IGD treatment and advance personalised therapeutic strategies. CLINICAL TRIALS REGISTRATION: The trial protocol was pre-registered with the Chinese Clinical Trial Registry (www.chictr.org.cn; ChiCTR2300077831(MM), ChiCTR2300075869(ApBm), ChiCTR2500095444(R-AC), ChiCTR2400090834(SAE)).",
+      "published": "2027 Dec",
+      "source": "PubMed citation",
+      "topic": "Neuroscience & Evolutionary Psychology",
+      "group": "general",
+      "headline": "IGD 치료 결과 예측하는 뇌 연결망 기반 네트워크 개발",
+      "brief": "세 가지 치료법을 받은 인터넷 게임 장애 환자 90명의 휴지기 fMRI 데이터를 이용해 치료 반응을 예측하는 연결망을 구축했다. 운동, 피질하, 주의 네트워크 중심의 부정적 연결망과 소뇌 관련 긍정적 연결망이 예측에 기여했다.",
+      "why": "IGD 치료 맞춤형 바이오마커 개발에 기여한다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Long-Range Temporal Correlations in Brain-State Dynamics via a Multivariate One-Hot Approach.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43041051/",
+      "summary": "Journal: International journal of neural systems. Abstract: Temporal sequences of discrete brain states provide a symbolic representation of large-scale neural dynamics. Here, we introduce a one-hot detrended fluctuation analysis (DFA) formulation to quantify long-range temporal correlations in the recurrence dynamics of individual states, independent of the embedding geometry or the symbolic transition encoding. Applied to resting-state Electroencephalographic microstate sequences acquired under eyes-open (EO) and eyes-closed (EC) conditions, the method reveals heterogeneous scaling exponents across states and a global increase in scaling under EC, indicating condition-dependent modulation of multi-timescale organization. Systematic surrogate manipulations disentangle the structural sources of scaling. Disrupting state lifetime statistics through microstate duration equalization or randomization markedly reduces the Hurst exponent, whereas transition-order shuffling alone produces comparatively minor changes in absolute scaling. These findings indicate that long-range dependence is primarily associated with structured state lifetimes rather than with higher-order symbolic syntax. At the same time, transition ordering modulates EO-EC differences, suggesting that symbolic organization contributes to the context-dependent expression of temporal memory. Combined surrogate operations reveal additive effects. The proposed one-hot formulation provides a minimal, representation-invariant characterization of temporal correlations in symbolic sequences and can be generalized to discrete brain-state dynamics obtained from different neuroimaging modalities.",
+      "published": "2027 May",
+      "source": "PubMed citation",
+      "topic": "Neuroscience & Evolutionary Psychology",
+      "group": "general",
+      "headline": "EEG 마이크로상태 시퀀스의 장기 시공간 상관성 분석법 제안",
+      "brief": "눈 뜸/감음 조건에서 EEG 마이크로상태 시퀀스의 장기 자기유사성을 원-핫 DFA로 분석했다. 상태 지속시간 구조가 장기 의존성에 주로 기여하며, 상태 전이 순서는 조건별 차이에 영향을 미쳤다.",
+      "why": "뇌 상태 동역학의 다중 시간척도 조직 이해에 도움을 준다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Portland Art Museum marks transformative first year post-expansion with nearly 500,000 visits - Portland Art Museum",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNcmY0bDdSMmxmcEJ1N2VqMFNmcW9fWG9mNW9kWENKUkNrRHFtejhLdDhLb2RvWDVPYmZlaFBocE53YmtsVUxUMUhDSFlaTjNRb2hDR01QTEJiSWpGQzlHNXo4aTU4WnNXTGZkS3Q5VEZxYVN5VFVsNThxX0Z4OVkzc05sdG9DRVFmZmx2RW9DcWVQRGNPTkthT2VRdnUwZW5KblNMUmRXaGw4YXFOTVlnU0sxb0ViMFJJY3paXzZ4QUI5eHJ1UFNr?oc=5",
+      "summary": "Portland Art Museum marks transformative first year post-expansion with nearly 500,000 visits &nbsp;&nbsp; Portland Art Museum",
+      "published": "2026-11-16",
+      "source": "News headline / RSS snippet",
+      "topic": "Art & Art History",
+      "group": "general",
+      "headline": "포틀랜드 미술관, 확장 후 첫 해 방문객 50만 명 기록",
+      "brief": "포틀랜드 미술관이 확장 공사 후 첫 해에 약 50만 명의 방문객을 맞이하며 변화를 성공적으로 이끌었다.",
+      "why": "미술관 확장과 관람객 증가를 보여주는 주요 문화계 소식이다.",
+      "evidence_note": "제목 기반 정보"
+    }
+  ]
+}
