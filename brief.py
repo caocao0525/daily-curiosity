@@ -283,11 +283,12 @@ def story_card(item, issue_date=None):
     )
 
 
-def page_shell(title, subheading, body, active="today"):
+def page_shell(title, subheading, body, active="today", archived=False):
+    prefix = "../" if archived else ""
     nav = (
         '<nav aria-label="Site navigation">'
-        + f'<a href="index.html" class="{"active" if active == "today" else ""}">Today</a>'
-        + f'<a href="archive.html" class="{"active" if active == "archive" else ""}">Archive</a>'
+        + f'<a href="{prefix}index.html" class="{"active" if active == "today" else ""}">Today</a>'
+        + f'<a href="{prefix}archive.html" class="{"active" if active == "archive" else ""}">Archive</a>'
         + '</nav>'
     )
     # Static pages: no server, database, or JavaScript framework required.
@@ -304,7 +305,7 @@ def page_shell(title, subheading, body, active="today"):
     )
 
 
-def render(issue):
+def render(issue, archived=False):
     cards = "\n".join(story_card(item) for item in issue["items"])
     if not cards:
         cards = '<p>No suitable stories today. Sources may be temporarily unavailable.</p>'
@@ -313,6 +314,7 @@ def render(issue):
         f'{CONFIG["title"]} · {issue["date"]}',
         f'Your 10-minute knowledge briefing · {issue["date"]}',
         intro + cards,
+        archived=archived,
     )
 
 
@@ -408,7 +410,7 @@ def main():
     (SITE / "archive.html").write_text(render_archive(historical), encoding="utf-8")
     for old_issue in historical:
         (site_issue_dir / f'{old_issue["date"]}.html').write_text(
-            render(old_issue), encoding="utf-8")
+            render(old_issue, archived=True), encoding="utf-8")
 
     for item in selected:
         seen[item["url"]] = today
