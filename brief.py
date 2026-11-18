@@ -163,9 +163,10 @@ def choose_and_summarize(candidates, seen):
     if not available:
         return []
     # Minimize prompt size and prevent unrelated data from entering the prompt.
-    payload = [{"id": i, **{k: v for k, v in x.items() if k in ("title", "summary", "published", "source", "topic", "group")}}
+    payload = [{"id": i, **{k: (v[:1100] if k == "summary" else v) for k, v in x.items()
+                             if k in ("title", "summary", "published", "source", "topic", "group")}}
                for i, x in enumerate(available)]
-    system = """You are a rigorous scientific editor preparing an English-first daily reading digest for a computational genomics researcher interested in neuroscience, evolutionary psychology, physics, mathematics, and fine art. Select up to 3 directly relevant research stories and 3 genuinely interesting general stories, never padding with unrelated material. For research, demand substantial relevance to computational genomics, epigenomics, chromatin, regulatory elements, biological foundation models, or broadly transferable ML methods. Reject unrelated clinical imaging, medical diagnoses, nanomaterials and generic biomedical items even if the search engine returned them. Aim for subject diversity among general stories. Use ONLY supplied titles, abstracts, RSS snippets and metadata, never invent methods or results. Label preprints and uncertainties, especially in psychology and news. Remember publication online and the future journal issue/eCollection date can differ. Write clear concise English primarily and a short Korean supplementary takeaway.
+    system = """You are a rigorous scientific editor preparing an English-first daily reading digest for a computational genomics researcher interested in neuroscience, evolutionary psychology, physics, mathematics, and fine art. Select up to 3 directly relevant research stories and 3 genuinely interesting general stories, never padding with unrelated material. These candidates span the last 45 days: prioritize relevance, rigor, and intellectual value above publication recency, and prefer newer items only when quality is similar. For research, demand substantial relevance to computational genomics, epigenomics, chromatin, regulatory elements, biological foundation models, or broadly transferable ML methods. Reject unrelated clinical imaging, medical diagnoses, nanomaterials and generic biomedical items even if the search engine returned them. Aim for subject diversity among general stories. Use ONLY supplied titles, abstracts, RSS snippets and metadata, never invent methods or results. Label preprints and uncertainties, especially in psychology and news. Remember publication online and the future journal issue/eCollection date can differ. Write clear concise English primarily and a short Korean supplementary takeaway.
 Return JSON object with key items, an array of {id, headline, summary, why, korean, evidence_note}. Headline: concise descriptive English. Summary: 2-3 short specific English sentences explaining problem, approach, findings where source allows. Why: one English sentence on its actual significance, no empty hype. Korean: one short Korean sentence summarizing the idea, NOT a lengthy translation. Evidence_note: short English caution if warranted, else empty. No links in JSON."""
     user = {"target_total": CONFIG["max_items"], "research_target": CONFIG["research_target"], "general_target": CONFIG["general_target"], "candidates": payload}
     request = {"model": CONFIG["model"], "temperature": 0.2,
@@ -392,27 +393,40 @@ def main():
     seen = {url: day for url, day in seen.items()
             if day >= (now.date() - dt.timedelta(days=60)).isoformat()}
 
-    # The first successful briefing of each date is the permanent edition.
-    # Subsequent manual reruns rebuild pages without collecting or calling the API.
+    # A rerun replaces today's edition only after successful generation.
+    # Older dates are never rewritten, and today's previous selection is not
+    # treated as already seen while testing/refining the same day's briefing.
     daily_file = issue_dir / f"{today}.json"
+    old_today = None
     if daily_file.exists():
-        issue = json.loads(daily_file.read_text(encoding="utf-8"))
-        if issue.get("date") != today or not isinstance(issue.get("items"), list):
+        old_today = json.loads(daily_file.read_text(encoding="utf-8"))
+        if old_today.get("date") != today or not isinstance(old_today.get("items"), list):
             raise ValueError(f"Invalid saved daily briefing: {daily_file}")
-        selected = issue["items"]
-        print(f"Reusing first briefing for {today}; no new API request.")
+
+    seen_prior_days = {url: day for url, day in seen.items() if day < today}
+    candidates = collect()
+    print(f"Total unique candidates from the past {CONFIG['max_days_old']} days: {len(candidates)}")
+    selected = choose_and_summarize(candidates, seen_prior_days)
+
+    # A failed or empty rerun must not wipe out a previously successful edition.
+    if not selected:
+        if old_today and old_today["items"]:
+            print("No suitable new result; retaining the existing today's briefing.")
+            issue = old_today
+            selected = issue["items"]
+        else:
+            raise RuntimeError("No stories selected; no edition saved. Check collection logs.")
     else:
-        candidates = collect()
-        print(f"Total unique candidates: {len(candidates)}")
-        selected = choose_and_summarize(candidates, seen)
         issue = {"date": today, "items": selected}
+        # These files are changed only after source collection and model selection succeed.
         daily_file.write_text(
             json.dumps(issue, ensure_ascii=False, indent=2), encoding="utf-8")
+        seen = dict(seen_prior_days)
         for item in selected:
             seen[item["url"]] = today
         seen_file.write_text(
             json.dumps(seen, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"Created first briefing for {today}.")
+        print(f"Saved final successful briefing for {today}, replacing an earlier edition if present.")
 
     (DATA / "latest.json").write_text(
         json.dumps(issue, ensure_ascii=False, indent=2), encoding="utf-8")
