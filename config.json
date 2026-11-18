@@ -5,8 +5,8 @@
   "max_items": 6,
   "research_target": 3,
   "general_target": 3,
-  "max_days_old": 7,
-  "max_candidates_per_source": 18,
+  "max_days_old": 45,
+  "max_candidates_per_source": 40,
   "model": "gpt-4.1-mini",
   "research_topics": [
     {
@@ -44,7 +44,7 @@
     {
       "name": "Art & Art History",
       "source": "google_news_rss",
-      "query": "(art exhibition OR art history OR museum OR auction) when:7d"
+      "query": "(art exhibition OR art history OR museum OR auction) when:45d"
     }
   ]
 }
