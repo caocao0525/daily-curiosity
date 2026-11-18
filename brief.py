@@ -202,44 +202,218 @@ Return JSON object with key items, an array of {id, headline, summary, why, kore
     return selected
 
 
+def category_icon(topic):
+    """A compact visual cue, with a fallback for future categories."""
+    name = (topic or "").lower()
+    if any(word in name for word in ("genom", "epigenom", "chromatin", "foundation model")):
+        return "🧬"
+    if "neuroscien" in name or "psycholog" in name or "cognit" in name:
+        return "🧠"
+    if "art" in name or "museum" in name:
+        return "🎨"
+    if "physic" in name or "quantum" in name:
+        return "⚛️"
+    if "math" in name:
+        return "∑"
+    if "ai / ml" in name or "machine learning" in name:
+        return "🤖"
+    return "📚"
+
+
+STYLE = """
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;max-width:800px;margin:0 auto;padding:30px 18px 80px;line-height:1.65;background:#fafaf8;color:#242726}
+a{color:#23665c}header{padding-bottom:18px;border-bottom:1px solid #d8dedc}
+h1{font-size:2.1rem;margin:0}header p,.meta,.caution,.muted{color:#68736e}
+.subtitle{margin:2px 0 12px}
+nav{display:flex;gap:10px;margin:18px 0 4px}
+nav a{text-decoration:none;border:1px solid #cbd7d0;padding:6px 17px;border-radius:999px;font-size:.9rem}
+nav a.active{background:#23665c;color:#fff;border-color:#23665c}
+.card{background:white;border:1px solid #e4e8e5;border-radius:14px;padding:21px;margin:17px 0}
+.card h2{font-size:1.14rem;line-height:1.4;margin:9px 0}
+.meta{display:flex;gap:12px;justify-content:space-between;font-size:.78rem;flex-wrap:wrap}
+.why{border-left:3px solid #84a69b;padding-left:12px}
+.ko{font-size:.9rem;color:#68736e;background:#f2f5f3;border-radius:8px;padding:10px 13px;margin:10px 0}
+.caution{font-size:.78rem}
+footer{font-size:.8rem;color:#68736e;margin-top:40px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+.filters input{font:inherit;color:inherit;background:transparent;border:1px solid #a9b6ae;border-radius:8px;padding:10px;min-width:0}
+.filters input[type=search]{flex:2 1 230px}.filters input[type=date]{flex:1 1 170px}
+.date-heading{margin:28px 0 8px;font-size:1rem}
+.archive-count{font-size:.85rem;color:#68736e}
+@media(prefers-color-scheme:dark){
+body{background:#151a18;color:#e8efec}
+.card{background:#202724;border-color:#38473f}
+.ko{background:#26312b;color:#c6d7cd}
+header{border-color:#38473f}a{color:#9bd8c0}
+nav a{border-color:#52685c}
+nav a.active{background:#316e5e;border-color:#316e5e}
+.filters input{border-color:#52685c}
+}
+"""
+
+
+def esc(value):
+    return html.escape(str(value or ""), quote=True)
+
+
+def story_card(item, issue_date=None):
+    topic = item.get("topic", "Other")
+    source = item.get("source", "")
+    published = item.get("published", "")
+    note = item.get("evidence_note", "")
+    korean = item.get("korean", "")
+    date_attr = f' data-date="{esc(issue_date)}"' if issue_date else ""
+    search_text = " ".join(str(item.get(k, "")) for k in (
+        "headline", "brief", "why", "korean", "topic", "source"))
+    search_attr = f' data-search="{esc(search_text.lower())}"' if issue_date else ""
+    heading = esc(item.get("headline", item.get("title", "")))
+    return (
+        f'<article class="card"{date_attr}{search_attr}>'
+        f'<div class="meta"><span>{category_icon(topic)} {esc(topic)}</span>'
+        f'<span>{esc(source)} · {esc(published)}</span></div>'
+        f'<h2>{heading}</h2>'
+        + (f'<p class="ko" lang="ko">{esc(korean)}</p>' if korean else "")
+        + f'<p>{esc(item.get("brief", ""))}</p>'
+        + f'<p class="why"><b>Why it matters:</b> {esc(item.get("why", ""))}</p>'
+        + (f'<p class="caution">{esc(note)}</p>' if note else "")
+        + f'<a href="{esc(item.get("url", ""))}" target="_blank" rel="noopener noreferrer">Read original ↗</a>'
+        + '</article>'
+    )
+
+
+def page_shell(title, subheading, body, active="today"):
+    nav = (
+        '<nav aria-label="Site navigation">'
+        + f'<a href="index.html" class="{"active" if active == "today" else ""}">Today</a>'
+        + f'<a href="archive.html" class="{"active" if active == "archive" else ""}">Archive</a>'
+        + '</nav>'
+    )
+    # Static pages: no server, database, or JavaScript framework required.
+    return (
+        '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        + f'<title>{esc(title)}</title><style>{STYLE}</style></head><body>'
+        + f'<header><h1>☀️ {esc(CONFIG["title"])}</h1>'
+        + f'<p class="subtitle">{esc(subheading)}</p>{nav}</header>'
+        + f'<main>{body}</main>'
+        + '<footer>Automatically generated from source abstracts, metadata and RSS snippets. '
+        'Please verify important findings in their original sources.</footer>'
+        '</body></html>'
+    )
+
+
 def render(issue):
-    def esc(value):
-        return html.escape(str(value or ""), quote=True)
+    cards = "\n".join(story_card(item) for item in issue["items"])
+    if not cards:
+        cards = '<p>No suitable stories today. Sources may be temporarily unavailable.</p>'
+    intro = f'<p class="muted">Research × Curiosity · {len(issue["items"])} stories</p>'
+    return page_shell(
+        f'{CONFIG["title"]} · {issue["date"]}',
+        f'Your 10-minute knowledge briefing · {issue["date"]}',
+        intro + cards,
+    )
+
+
+def render_archive(issues):
     cards = []
-    for item in issue["items"]:
-        cards.append(f'''<article class="card"><div class="meta"><span>{esc(item['topic'])}</span><span>{esc(item['source'])} · {esc(item['published'])}</span></div>
-<h2>{esc(item['headline'])}</h2><p>{esc(item['brief'])}</p><p class="why"><b>Why it matters</b> {esc(item['why'])}</p>
-{f'<p class="ko"><b>한국어 요약</b> {esc(item.get("korean", ""))}</p>' if item.get("korean") else ""}
-{f'<p class="caution">{esc(item["evidence_note"])}</p>' if item['evidence_note'] else ''}
-<a href="{esc(item['url'])}" target="_blank" rel="noopener noreferrer">Read original ↗</a></article>''')
-    content = '\n'.join(cards) if cards else '<p>오늘은 선정된 소식이 없어요. 새로운 자료가 없거나 출처 수집에 문제가 있었을 수 있습니다.</p>'
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{esc(CONFIG['title'])} · {esc(issue['date'])}</title><style>
-:root{{color-scheme:light dark}}body{{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;max-width:760px;margin:0 auto;padding:32px 18px 80px;line-height:1.65;background:#fafaf8;color:#242726}}
-a{{color:#23665c}}header{{padding-bottom:18px;border-bottom:1px solid #d8dedc}}h1{{font-size:2.1rem;margin:0}}header p,.meta,.caution{{color:#68736e}}.subtitle{{margin:2px 0 12px}}.card{{background:white;border:1px solid #e4e8e5;border-radius:14px;padding:21px;margin:17px 0}}.card h2{{font-size:1.18rem;line-height:1.4;margin:11px 0}}.meta{{display:flex;gap:12px;justify-content:space-between;font-size:.78rem;flex-wrap:wrap}}.why{{border-left:3px solid #84a69b;padding-left:12px}}.ko{{font-size:.9rem;color:#68736e;background:#f2f5f3;border-radius:8px;padding:12px 14px}}.caution{{font-size:.78rem}}footer{{font-size:.8rem;color:#68736e;margin-top:40px}}@media(prefers-color-scheme:dark){{body{{background:#151a18;color:#e8efec}}.card{{background:#202724;border-color:#38473f}}.ko{{background:#26312b;color:#c6d7cd}}header{{border-color:#38473f}}a{{color:#9bd8c0}}}}
-</style></head><body><header><h1>☀️ {esc(CONFIG['title'])}</h1><p class="subtitle">Your 10-minute knowledge briefing · {esc(issue['date'])}</p><p>Research × Curiosity · {len(issue['items'])} stories</p></header>
-<main>{content}</main><footer>Summaries are generated from abstracts, metadata and RSS excerpts. Verify important claims in original sources.</footer></body></html>'''
+    total = 0
+    for issue in sorted(issues, key=lambda x: x["date"], reverse=True):
+        date = issue["date"]
+        if not issue.get("items"):
+            continue
+        cards.append(f'<section class="issue" data-date="{esc(date)}">'
+                     f'<h2 class="date-heading"><a href="issues/{esc(date)}.html">{esc(date)}</a></h2>')
+        for item in issue["items"]:
+            cards.append(story_card(item, date))
+            total += 1
+        cards.append('</section>')
+    body = (
+        '<p class="muted">Browse previous editions, newest first.</p>'
+        '<div class="filters">'
+        '<input id="search" type="search" placeholder="Search keywords or topics…" aria-label="Search archive">'
+        '<input id="date" type="date" aria-label="Filter by date">'
+        '</div>'
+        f'<p id="count" class="archive-count">{total} stories archived</p>'
+        + "\n".join(cards)
+        + '<p id="empty" hidden>No matching stories. Try another keyword or date.</p>'
+        + """<script>
+(function(){
+ const search=document.getElementById('search'), date=document.getElementById('date');
+ const count=document.getElementById('count'), empty=document.getElementById('empty');
+ const sections=Array.from(document.querySelectorAll('.issue'));
+ function update(){
+   const q=search.value.trim().toLocaleLowerCase(), d=date.value;
+   let n=0;
+   sections.forEach(section=>{
+     let matches=0;
+     section.querySelectorAll('.card').forEach(card=>{
+       const hit=(!q || card.dataset.search.includes(q)) &&
+                 (!d || card.dataset.date===d);
+       card.hidden=!hit;
+       if(hit){matches++;n++;}
+     });
+     section.hidden=matches===0;
+   });
+   count.textContent=n+' matching stories';
+   empty.hidden=n!==0;
+ }
+ search.addEventListener('input',update);
+ date.addEventListener('input',update);
+})();
+</script>"""
+    )
+    return page_shell(
+        f'Archive · {CONFIG["title"]}',
+        'Past briefings · searchable by keyword and date',
+        body, active="archive",
+    )
 
 
 def main():
     DATA.mkdir(exist_ok=True)
     SITE.mkdir(exist_ok=True)
+    issue_dir = DATA / "issues"
+    site_issue_dir = SITE / "issues"
+    issue_dir.mkdir(exist_ok=True)
+    site_issue_dir.mkdir(exist_ok=True)
+
     now = dt.datetime.now(ZoneInfo(CONFIG["timezone"]))
     today = now.date().isoformat()
     seen_file = DATA / "seen.json"
     seen = json.loads(seen_file.read_text(encoding="utf-8")) if seen_file.exists() else {}
-    # Keep recent history only; storage remains bounded.
-    seen = {url: day for url, day in seen.items() if day >= (now.date() - dt.timedelta(days=60)).isoformat()}
-    candidate_items = collect()
-    print(f"Total unique candidates: {len(candidate_items)}")
-    selected = choose_and_summarize(candidate_items, seen)
+    # Keep the deduplication window bounded; the historical issues remain preserved.
+    seen = {url: day for url, day in seen.items()
+            if day >= (now.date() - dt.timedelta(days=60)).isoformat()}
+
+    candidates = collect()
+    print(f"Total unique candidates: {len(candidates)}")
+    selected = choose_and_summarize(candidates, seen)
+
     issue = {"date": today, "items": selected}
-    (DATA / "latest.json").write_text(json.dumps(issue, ensure_ascii=False, indent=2), encoding="utf-8")
+    (DATA / "latest.json").write_text(
+        json.dumps(issue, ensure_ascii=False, indent=2), encoding="utf-8")
+    (issue_dir / f"{today}.json").write_text(
+        json.dumps(issue, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    historical = []
+    for path in sorted(issue_dir.glob("????-??-??.json"), reverse=True):
+        try:
+            historical.append(json.loads(path.read_text(encoding="utf-8")))
+        except (json.JSONDecodeError, OSError) as exc:
+            print(f"WARNING: skipping corrupt archive {path.name}: {exc}", file=sys.stderr)
+
     (SITE / "index.html").write_text(render(issue), encoding="utf-8")
+    (SITE / "archive.html").write_text(render_archive(historical), encoding="utf-8")
+    for old_issue in historical:
+        (site_issue_dir / f'{old_issue["date"]}.html').write_text(
+            render(old_issue), encoding="utf-8")
+
     for item in selected:
         seen[item["url"]] = today
     seen_file.write_text(json.dumps(seen, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Published {len(selected)} cards on {today}")
+    print(f"Published {len(selected)} cards on {today}; {len(historical)} archived editions")
 
 
 if __name__ == "__main__":
