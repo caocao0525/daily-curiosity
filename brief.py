@@ -4,6 +4,7 @@ Inputs are abstracts / headlines, not full text: the LLM is told to avoid
 unsupported claims and to distinguish preprints from peer-reviewed publications.
 """
 import datetime as dt
+import hashlib
 import html
 import json
 import os
@@ -240,7 +241,14 @@ nav a.active{background:#23665c;color:#fff;border-color:#23665c}
 footer{font-size:.8rem;color:#68736e;margin-top:40px}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
 .filters input{font:inherit;color:inherit;background:transparent;border:1px solid #a9b6ae;border-radius:8px;padding:10px;min-width:0}
-.filters input[type=search]{flex:2 1 230px}.filters input[type=date]{flex:1 1 170px}.filters button{font:inherit;border:1px solid #a9b6ae;color:inherit;background:transparent;border-radius:8px;padding:9px 12px;cursor:pointer}.filters button:hover{border-color:#23665c}
+.filters input[type=search]{flex:2 1 230px}.filters select{flex:1 1 170px}
+.filters select{font:inherit;color:inherit;background:transparent;border:1px solid #a9b6ae;border-radius:8px;padding:10px}
+.story-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.story-actions button,.audio-controls button{cursor:pointer;background:transparent;color:inherit;border:1px solid #b8c8be;border-radius:8px;padding:6px 10px}
+.story-actions button[aria-pressed=true]{color:#bc4763;border-color:#bc4763}
+.audio-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0}
+.audio-controls select{border-radius:8px;padding:6px 10px;color:inherit;background:transparent;border:1px solid #b8c8be}
+[hidden]{display:none!important}.filters button{font:inherit;border:1px solid #a9b6ae;color:inherit;background:transparent;border-radius:8px;padding:9px 12px;cursor:pointer}.filters button:hover{border-color:#23665c}
 .date-heading{margin:28px 0 8px;font-size:1rem}
 .archive-count{font-size:.85rem;color:#68736e}
 @media(prefers-color-scheme:dark){
@@ -250,7 +258,7 @@ body{background:#151a18;color:#e8efec}
 header{border-color:#38473f}a{color:#9bd8c0}
 nav a{border-color:#52685c}
 nav a.active{background:#316e5e;border-color:#316e5e}
-.filters input{border-color:#52685c}
+.filters input,.filters select{border-color:#52685c}
 }
 """
 
@@ -270,8 +278,19 @@ def story_card(item, issue_date=None):
         "headline", "brief", "why", "korean", "topic", "source"))
     search_attr = f' data-search="{esc(search_text.lower())}"' if issue_date else ""
     heading = esc(item.get("headline", item.get("title", "")))
+    # Store a complete, escaped snapshot with a stable ID for local Favorites.
+    story = {k: str(item.get(k, "")) for k in
+             ("title", "headline", "brief", "why", "korean", "topic",
+              "source", "published", "url", "evidence_note")}
+    story["id"] = hashlib.sha256(story["url"].encode("utf-8")).hexdigest()[:24]
+    story["icon"] = category_icon(topic)
+    story_json = esc(json.dumps(story, ensure_ascii=False))
+    controls = ('<div class="story-actions">'
+                '<button class="favorite" type="button" aria-label="Toggle favorite">♡ Save</button>'
+                '<button class="listen-story" type="button">🔊 Listen</button>'
+                '</div>')
     return (
-        f'<article class="card"{date_attr}{search_attr}>'
+        f'<article class="card"{date_attr}{search_attr} data-story="{story_json}">'
         f'<div class="meta"><span>{category_icon(topic)} {esc(topic)}</span>'
         f'<span>{esc(source)} · {esc(published)}</span></div>'
         f'<h2>{heading}</h2>'
@@ -280,7 +299,7 @@ def story_card(item, issue_date=None):
         + f'<p class="why"><b>Why it matters:</b> {esc(item.get("why", ""))}</p>'
         + (f'<p class="caution">{esc(note)}</p>' if note else "")
         + f'<a href="{esc(item.get("url", ""))}" target="_blank" rel="noopener noreferrer">Read original ↗</a>'
-        + '</article>'
+        + controls + '</article>'
     )
 
 
@@ -290,6 +309,7 @@ def page_shell(title, subheading, body, active="today", archived=False):
         '<nav aria-label="Site navigation">'
         + f'<a href="{prefix}index.html" class="{"active" if active == "today" else ""}">Today</a>'
         + f'<a href="{prefix}archive.html" class="{"active" if active == "archive" else ""}">Archive</a>'
+        + f'<a href="{prefix}favorites.html" class="{"active" if active == "favorites" else ""}">Favorites ♥</a>'
         + '</nav>'
     )
     # Static pages: no server, database, or JavaScript framework required.
@@ -302,15 +322,27 @@ def page_shell(title, subheading, body, active="today", archived=False):
         + f'<main>{body}</main>'
         + '<footer>Automatically generated from source abstracts, metadata and RSS snippets. '
         'Please verify important findings in their original sources.</footer>'
-        '</body></html>'
+        + f'<script src="{prefix}assets/daily.js" defer></script>'
+        + '</body></html>'
     )
+
+
+def audio_controls():
+    return ('<div class="audio-controls" aria-label="Audio playback">'
+            '<button id="listen-all" type="button">▶ Listen to briefing</button>'
+            '<button id="speech-pause" type="button" disabled>Pause</button>'
+            '<button id="speech-stop" type="button" disabled>Stop</button>'
+            '<label for="speech-speed">Speed</label>'
+            '<select id="speech-speed" aria-label="Speech speed">'
+            '<option value="1">1×</option><option value="1.25">1.25×</option>'
+            '<option value="1.5">1.5×</option></select></div>')
 
 
 def render(issue, archived=False):
     cards = "\n".join(story_card(item) for item in issue["items"])
     if not cards:
         cards = '<p>No suitable stories today. Sources may be temporarily unavailable.</p>'
-    intro = f'<p class="muted">Research × Curiosity · {len(issue["items"])} stories</p>'
+    intro = f'<p class="muted">Research × Curiosity · {len(issue["items"])} stories</p>' + audio_controls()
     return page_shell(
         f'{CONFIG["title"]} · {issue["date"]}',
         f'Your 10-minute knowledge briefing · {issue["date"]}',
@@ -333,47 +365,41 @@ def render_archive(issues):
             total += 1
         cards.append('</section>')
     body = (
-        '<p class="muted">Browse previous editions, newest first.</p>'
+        '<p class="muted">Browse past briefings by keyword and date range.</p>'
         '<div class="filters">'
-        '<input id="search" type="search" placeholder="Search keywords or topics…" aria-label="Search archive">'
-        '<input id="date" type="date" aria-label="Filter by date">'
-        '<button id="clear-date" type="button">Clear date</button>'
+        '<input id="search" type="search" placeholder="Search all stories…" aria-label="Search archive">'
+        '<select id="period" aria-label="Archive date range">'
+        '<option value="all">All time</option>'
+        '<option value="7">Past week</option>'
+        '<option value="30">Past month</option>'
+        '<option value="90">Past 3 months</option>'
+        '<option value="180">Past 6 months</option>'
+        '</select>'
+        '<button id="clear-filters" type="button">Clear filters</button>'
         '</div>'
-        f'<p id="count" class="archive-count">{total} stories archived</p>'
+        f'<p id="count" class="archive-count">{total} archived stories</p>'
         + "\n".join(cards)
-        + '<p id="empty" hidden>No matching stories. Try another keyword or date.</p>'
-        + """<script>
-(function(){
- const search=document.getElementById('search'), date=document.getElementById('date');
- const count=document.getElementById('count'), empty=document.getElementById('empty');
- const sections=Array.from(document.querySelectorAll('.issue'));
- function update(){
-   const q=search.value.trim().toLocaleLowerCase(), d=date.value;
-   let n=0;
-   sections.forEach(section=>{
-     let matches=0;
-     section.querySelectorAll('.card').forEach(card=>{
-       const hit=(!q || card.dataset.search.includes(q)) &&
-                 (!d || card.dataset.date===d);
-       card.hidden=!hit;
-       if(hit){matches++;n++;}
-     });
-     section.hidden=matches===0;
-   });
-   count.textContent=n+' matching stories';
-   empty.hidden=n!==0;
- }
- search.addEventListener('input',update);
- date.addEventListener('input',update);
- document.getElementById('clear-date').addEventListener('click',()=>{date.value='';update();});
- update();
-})();
-</script>"""
+        + '<p id="empty" hidden>No matching stories. Try another keyword or time period.</p>'
     )
     return page_shell(
         f'Archive · {CONFIG["title"]}',
-        'Past briefings · searchable by keyword and date',
+        'Past briefings · keyword and period search',
         body, active="archive",
+    )
+
+
+def render_favorites():
+    body = (
+        '<p class="muted">Stories you save are kept in this browser, including their summaries. '
+        'Favorites do not automatically sync across devices.</p>'
+        + audio_controls()
+        + '<p id="favorites-count" class="archive-count">0 saved stories</p>'
+        + '<p id="favorites-empty">No favorites yet. Tap ♡ Save on a story to keep it here.</p>'
+        + '<div id="favorites-list"></div>'
+    )
+    return page_shell(
+        f'Favorites · {CONFIG["title"]}', 'Your saved reading collection',
+        body, active="favorites",
     )
 
 
@@ -440,6 +466,11 @@ def main():
 
     (SITE / "index.html").write_text(render(issue), encoding="utf-8")
     (SITE / "archive.html").write_text(render_archive(historical), encoding="utf-8")
+    (SITE / "favorites.html").write_text(render_favorites(), encoding="utf-8")
+    asset_dir = SITE / "assets"
+    asset_dir.mkdir(exist_ok=True)
+    (asset_dir / "daily.js").write_text(
+        (ROOT / "assets" / "daily.js").read_text(encoding="utf-8"), encoding="utf-8")
     for old_issue in historical:
         (site_issue_dir / f'{old_issue["date"]}.html').write_text(
             render(old_issue, archived=True), encoding="utf-8")
