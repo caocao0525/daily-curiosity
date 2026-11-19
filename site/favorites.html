@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Favorites · The Daily Curiosity</title><style>
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;max-width:800px;margin:0 auto;padding:30px 18px 80px;line-height:1.65;background:#fafaf8;color:#242726}
+a{color:#23665c}header{padding-bottom:18px;border-bottom:1px solid #d8dedc}
+h1{font-size:2.1rem;margin:0}header p,.meta,.caution,.muted{color:#68736e}
+.subtitle{margin:2px 0 12px}
+nav{display:flex;gap:10px;margin:18px 0 4px}
+nav a{text-decoration:none;border:1px solid #cbd7d0;padding:6px 17px;border-radius:999px;font-size:.9rem}
+nav a.active{background:#23665c;color:#fff;border-color:#23665c}
+.card{background:white;border:1px solid #e4e8e5;border-radius:14px;padding:21px;margin:17px 0}
+.card h2{font-size:1.14rem;line-height:1.4;margin:9px 0}
+.meta{display:flex;gap:12px;justify-content:space-between;font-size:.78rem;flex-wrap:wrap}
+.why{border-left:3px solid #84a69b;padding-left:12px}
+.ko{font-size:.9rem;color:#68736e;background:#f2f5f3;border-radius:8px;padding:10px 13px;margin:10px 0}
+.caution{font-size:.78rem}
+footer{font-size:.8rem;color:#68736e;margin-top:40px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+.filters input{font:inherit;color:inherit;background:transparent;border:1px solid #a9b6ae;border-radius:8px;padding:10px;min-width:0}
+.filters input[type=search]{flex:2 1 230px}.filters select{flex:1 1 170px}
+.filters select{font:inherit;color:inherit;background:transparent;border:1px solid #a9b6ae;border-radius:8px;padding:10px}
+.story-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.story-actions button,.audio-controls button{cursor:pointer;background:transparent;color:inherit;border:1px solid #b8c8be;border-radius:8px;padding:6px 10px}
+.story-actions button[aria-pressed=true]{color:#bc4763;border-color:#bc4763}
+.audio-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0}
+.audio-controls select{border-radius:8px;padding:6px 10px;color:inherit;background:transparent;border:1px solid #b8c8be}
+[hidden]{display:none!important}.filters button{font:inherit;border:1px solid #a9b6ae;color:inherit;background:transparent;border-radius:8px;padding:9px 12px;cursor:pointer}.filters button:hover{border-color:#23665c}
+.date-heading{margin:28px 0 8px;font-size:1rem}
+.archive-count{font-size:.85rem;color:#68736e}
+@media(prefers-color-scheme:dark){
+body{background:#151a18;color:#e8efec}
+.card{background:#202724;border-color:#38473f}
+.ko{background:#26312b;color:#c6d7cd}
+header{border-color:#38473f}a{color:#9bd8c0}
+nav a{border-color:#52685c}
+nav a.active{background:#316e5e;border-color:#316e5e}
+.filters input,.filters select{border-color:#52685c}
+}
+</style></head><body><header><h1>☀️ The Daily Curiosity</h1><p class="subtitle">Your saved reading collection</p><nav aria-label="Site navigation"><a href="index.html" class="">Today</a><a href="archive.html" class="">Archive</a><a href="favorites.html" class="active">Favorites ♥</a></nav></header><main><p class="muted">Stories you save are kept in this browser, including their summaries. Favorites do not automatically sync across devices.</p><div class="audio-controls" aria-label="Audio playback"><button id="listen-all" type="button">▶ Listen to briefing</button><button id="speech-pause" type="button" disabled>Pause</button><button id="speech-stop" type="button" disabled>Stop</button><label for="speech-speed">Speed</label><select id="speech-speed" aria-label="Speech speed"><option value="1">1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></div><p id="favorites-count" class="archive-count">0 saved stories</p><p id="favorites-empty">No favorites yet. Tap ♡ Save on a story to keep it here.</p><div id="favorites-list"></div></main><footer>Automatically generated from source abstracts, metadata and RSS snippets. Please verify important findings in their original sources.</footer><script src="assets/daily.js" defer></script></body></html>
