@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-19",
+  "items": [
+    {
+      "title": "Decoding the regulatory programs governing glioblastoma plasticity.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42983099/",
+      "summary": "Journal: Nature. Abstract: Glioblastoma is incurable and resistant to therapy despite genomic stability under treatment1-8, suggesting that non-genetic cellular plasticity is a central driver of progression. Whether such plasticity reflects stochastic state switching or is governed by predictable gene regulation has remained unclear9-13. Here we introduce scDORI (single-cell deep multi-omic regulatory inference)-a deep-learning framework that infers enhancer-driven gene-regulatory networks at single-cell resolution-and apply it to single-nucleus multiome profiles of more than one million cells from primary glioblastomas. Integrating computational inference with systematic perturbation screens across patient-derived models, we show that a structured regulatory program with an asymmetric interplay of activators and repressors governs cellular plasticity in glioblastoma. The resulting transition landscape is hierarchical and predictable, but permits cross-lineage trajectories that are absent from normal neurodevelopment. Within this landscape, low-plasticity states such as the neuronal-like state are not stable differentiation end points but actively maintained configurations, stabilized by a network of safeguard repressors that silence alternative fates. We identify MYT1L as the dominant member of this network, and show that it binds to and represses master regulators of every alternative state to consolidate neuronal-like identity. MYT1L restricted plasticity even under standard-of-care therapy and suppressed tumour growth and invasion in vivo. Conversely, loss of MYT1L reactivated plasticity and accelerated malignant features, indicating that low-plasticity identity requires continuous repression. These findings reframe malignant cell state stability as a balance between activation and continuous repression, and nominate safeguard repressors as candidate therapeutic targets that are distinct from differentiation-inducing activators, with potential relevance across cancers in which phenotypic switching drives therapy resistance.",
+      "published": "2026-11-04",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "Deep multi-omic regulatory inference reveals glioblastoma plasticity mechanisms",
+      "brief": "A deep-learning framework (scDORI) infers enhancer-driven gene-regulatory networks at single-cell resolution in glioblastoma, integrating multi-omic data from over one million cells. It reveals a hierarchical regulatory program with asymmetric activator and repressor interplay governing cellular plasticity, permitting cross-lineage trajectories absent in normal neurodevelopment. Perturbation screens validate this structured program as a driver of glioblastoma progression.",
+      "why": "This study applies advanced deep learning to integrate multi-omic single-cell data, elucidating gene regulatory mechanisms underlying glioblastoma plasticity, relevant for computational genomics and regulatory element modeling.",
+      "korean": "단일 세포 다중 오믹스 데이터를 통합해 교모세포종 세포 가소성의 유전자 조절 메커니즘을 밝혀냈다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Rethinking One Gene, One Token: Transcriptome-Aware Tokenization for Single-Cell Foundation Models",
+      "url": "https://arxiv.org/abs/2611.05410v2",
+      "summary": "Single-cell foundation models typically treat each gene as a token, which is both costly and wasteful. A cell can express thousands of genes, so one token per gene makes self-attention expensive, yet many of these genes are detected at low levels and carry too little signal to deserve a token of their own. Genes that are expressed together could instead share a token, leaving separate tokens for genes that stand out. We introduce scTAT (Transcriptome-Aware Tokenization), which pairs a gene-set vocabulary with a per-cell tokenizer. The vocabulary holds overlapping gene sets that recur with stable relative expression across the pretraining corpus. Using these sets raises two difficulties. First, which genes should share a token depends on the cell, whereas existing multi-gene tokens fix the grouping in advance. Second, gene sets of different sizes must be compared with single genes on a common scale. The tokenizer therefore decides per cell, letting gene sets and single genes compete for token positions under an expression score normalized by the square root of set size. Training still reconstructs individual genes, so predictions stay at gene resolution. In frozen-embedding cell-type annotation, scTAT matches the strongest one-gene-per-token model with half the token budget. Its advantage over one-gene-per-token models at the same budget grows as the budget shrinks and the tokenizer assigns more positions to gene sets. Encoding the same genes with gene-set tokens also nearly halves the Transformer's matrix-multiplication cost. These results show that a token need not hold exactly one gene: when the tokenizer decides per cell which genes share a token, a fixed budget covers more of each transcriptome at no cost in annotation accuracy.",
+      "published": "2026-10-21",
+      "source": "arXiv preprint",
+      "topic": "Biological Foundation Models",
+      "group": "research",
+      "headline": "Transcriptome-aware tokenization improves efficiency of single-cell foundation models",
+      "brief": "scTAT introduces a transcriptome-aware tokenization method for single-cell foundation models, grouping co-expressed genes into overlapping gene-set tokens per cell. This reduces the token count compared to one gene per token, improving computational efficiency while preserving biological signal. The tokenizer dynamically selects gene sets per cell, normalizing expression scores to balance token representation.",
+      "why": "This method advances foundation models for single-cell transcriptomics by reducing token dimensionality while maintaining interpretability and biological relevance, enhancing scalability in computational genomics.",
+      "korean": "단일 세포 기초 모델의 효율성을 높이기 위해 유전자 집합 기반 동적 토크나이제이션을 도입했다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "What DNA Foundation Models Learn Beyond Sequence Composition",
+      "url": "https://arxiv.org/abs/2610.15711v1",
+      "summary": "Do genomic foundation models (FMs) provide predictive information beyond simple sequence composition? We evaluate frozen representations from five DNA FMs against normalized k-mer frequencies across 57 genomic classification datasets and two exploratory gene-expression regression tasks. Simple k-mer features remain competitive with most models, whereas NTv3 shows a consistent advantage; the ranking is robust to globally fixed and multi-scale k-mer baselines and alternative downstream probes. To test incremental predictive utility directly, we compare global 6-mer features with their concatenation with each FM embedding under a matched Random Forest protocol. NTv3 improves 46 of 57 datasets (mean $Δ$MCC = +0.072), while Caduceus provides smaller gains and the other models do not improve mean MCC. We separately decompose embeddings into a component linearly predictable from 6-mer frequencies and a ridge residual, finding that linear recoverability does not reliably indicate downstream utility. Exact 6-mer-preserving shuffles further reveal task-relevant sequence-order sensitivity, most pronounced for NTv3, although order sensitivity alone does not guarantee predictive improvements. Our results establish compositional features as essential controls and offer complementary diagnostics for evaluating the added value of frozen genomic representations, without making claims about fine-tuning capacity.",
+      "published": "2026-10-11",
+      "source": "arXiv preprint",
+      "topic": "Biological Foundation Models",
+      "group": "research",
+      "headline": "DNA foundation models capture regulatory information beyond k-mer composition",
+      "brief": "Evaluating frozen embeddings from five DNA foundation models against k-mer frequency baselines across 57 genomic classification datasets, the study finds that simple k-mer features remain competitive, but the NTv3 model consistently outperforms. Linear readouts fitted to frozen representations can match or exceed native model outputs, and functional post-training improves capabilities. The models capture sequence-order sensitivity beyond k-mer composition, indicating regulatory information is learned.",
+      "why": "This work critically assesses genomic foundation models, showing that some models capture regulatory sequence features beyond simple k-mer statistics, informing model selection and interpretation in computational genomics.",
+      "korean": "DNA 기초 모델이 단순 k-머 통계 이상의 조절 정보를 포착함을 보여준다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "This Is Your Brain on Art - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOSElRTmV6VEhJWWduUWZVcFpKVXpwSTVOUVhIaC10cDNFbFp5aFpEZUlpaXdvWl82eXdtVW95YTZLUFRGNDVOajZYYm9wYTdwYVFoOVp6bkVSY2RPN0xhNzBraENtTk95Q0NCTXFFcmdHUktDbTEyNFZQaEpFU2tHZA?oc=5",
+      "summary": "This Is Your Brain on Art &nbsp;&nbsp; The New York Times",
+      "published": "2026-10-26",
+      "source": "News headline / RSS snippet",
+      "topic": "Art & Art History",
+      "group": "general",
+      "headline": "This Is Your Brain on Art",
+      "brief": "An article exploring how engagement with art affects brain activity and cognitive processes, highlighting neuroscience insights into aesthetic experience and creativity.",
+      "why": "Provides a rigorous neuroscience perspective on how art influences brain function, relevant for computational genomics researchers interested in neural correlates of cognition and creativity.",
+      "korean": "예술 감상이 뇌 활동과 인지 과정에 미치는 영향을 신경과학적으로 탐구한다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "‘Deceptively simple’: Gullah Geechee art exhibition illustrates that beauty lies in the details - The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQYlNTZlgyQnZ3Vi1IVjdNLWVxMHlrV0xzNjZuVWJTRXRwcWlsQ2RzVTdwWXg4anpLUXZyVkRnTWdlYXpQbmEtcm5UdEt0dUF4TzJRbjA2a1F5TE8tMlY2YUU5YWZXem8yZjhBLWRZbENTdDhveDkyVUNFVDVUZmtBVnpjRkp0YjBrZmpyMnFpd3hlUF8xZFRoTg?oc=5",
+      "summary": "‘Deceptively simple’: Gullah Geechee art exhibition illustrates that beauty lies in the details &nbsp;&nbsp; The Guardian",
+      "published": "2026-10-28",
+      "source": "News headline / RSS snippet",
+      "topic": "Art & Art History",
+      "group": "general",
+      "headline": "‘Deceptively simple’: Gullah Geechee art exhibition illustrates that beauty lies in the details",
+      "brief": "An exhibition showcasing Gullah Geechee art emphasizes intricate details and cultural heritage, illustrating how simplicity can convey profound artistic expression.",
+      "why": "Offers an insightful perspective on cultural art forms emphasizing detailed craftsmanship, enriching understanding of fine art diversity and its psychological impact.",
+      "korean": "Gullah Geechee 예술 전시는 세밀한 표현을 통해 문화적 아름다움을 드러낸다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Led by Record-Breaking $190.4 M. van Gogh, Sotheby’s Impressionist and Modern Art Sales Rake in $777.8 M. - ARTnews.com",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNX0I5OFVjWlZGcXlQU1JfVjBzUHBYbnJkREtmMGUycjJVUHVCTERfNFNHbUxfMktpdWlhY0pfV18zVFJoRTR5M1FiWnRXdWFEbEtUX1k0Nkl0N0xPaTN4MkFiUmhUekFZZUFpMkRnT2ZtcW1hMVdIZWJfZFlZMk9VQlFvT1Bucm5sV2VkOU5LWmxQSE9jR2FIQXIzTmFhTHF3LXJSZQ?oc=5",
+      "summary": "Led by Record-Breaking $190.4 M. van Gogh, Sotheby’s Impressionist and Modern Art Sales Rake in $777.8 M. &nbsp;&nbsp; ARTnews.com",
+      "published": "2026-11-19",
+      "source": "News headline / RSS snippet",
+      "topic": "Art & Art History",
+      "group": "general",
+      "headline": "Led by Record-Breaking $190.4 M. van Gogh, Sotheby’s Impressionist and Modern Art Sales Rake in $777.8 M.",
+      "brief": "Sotheby’s recent Impressionist and Modern Art sales achieved a record-breaking $777.8 million, led by a $190.4 million Van Gogh painting, highlighting the high valuation and market dynamics of fine art.",
+      "why": "Demonstrates the economic and cultural significance of fine art in contemporary society, relevant for understanding art valuation and its influence on cultural heritage preservation.",
+      "korean": "Sotheby’s 경매에서 반 고흐 작품이 기록적인 가격으로 낙찰되며 미술 시장의 중요성을 보여준다.",
+      "evidence_note": ""
+    }
+  ]
+}
