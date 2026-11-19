@@ -22,7 +22,15 @@
   const speedSelect = document.getElementById("speech-speed");
   const speed = () => Number(speedSelect?.value || 1);
   let speaking = false;
+  let activeStoryId = null;
   function setSpeechUI() {
+    document.querySelectorAll("button.listen-story").forEach(button => {
+      const story = readStory(button.closest(".card"));
+      const current = speaking && activeStoryId && story.id === activeStoryId;
+      button.textContent = current ? (audio?.paused ? "▶ Resume" : "⏸ Pause") : "🔊 Listen";
+      button.setAttribute("aria-pressed", current ? "true" : "false");
+      button.title = current ? (audio?.paused ? "Resume reading" : "Pause reading") : "Listen to this story";
+    });
     const pause = document.getElementById("speech-pause");
     if (pause) { pause.textContent = audio?.paused ? "Resume" : "Pause"; pause.disabled = !speaking; }
     const stop = document.getElementById("speech-stop");
@@ -31,14 +39,16 @@
   function stopSpeech() {
     if (speechAvailable) audio.cancel();
     speaking = false;
+    activeStoryId = null;
     setSpeechUI();
   }
-  function speak(stories) {
+  function speak(stories, storyId = null) {
     if (!speechAvailable) { alert("This browser does not support speech playback."); return; }
     const scripts = stories.map(sayText).filter(Boolean);
     if (!scripts.length) return;
     stopSpeech();
     speaking = true;
+    activeStoryId = storyId;
     scripts.forEach((script, index) => {
       const utterance = new SpeechSynthesisUtterance(script);
       utterance.lang = "en-US";
@@ -46,8 +56,8 @@
       const voice = audio.getVoices().find(v => v.lang?.toLowerCase().startsWith("en") && v.localService);
       if (voice) utterance.voice = voice;
       if (index === scripts.length - 1) {
-        utterance.onend = () => { speaking = false; setSpeechUI(); };
-        utterance.onerror = () => { speaking = false; setSpeechUI(); };
+        utterance.onend = () => { speaking = false; activeStoryId = null; setSpeechUI(); };
+        utterance.onerror = () => { speaking = false; activeStoryId = null; setSpeechUI(); };
       }
       audio.speak(utterance);
     });
@@ -121,7 +131,15 @@
       return;
     }
     const listen = event.target.closest("button.listen-story");
-    if (listen) speak([readStory(listen.closest(".card"))]);
+    if (listen) {
+      const story = readStory(listen.closest(".card"));
+      if (speaking && activeStoryId === story.id) {
+        if (audio.paused) audio.resume(); else audio.pause();
+        setSpeechUI();
+      } else {
+        speak([story], story.id);
+      }
+    }
   });
   document.getElementById("listen-all")?.addEventListener("click", () => speak(cards().filter(c => !c.hidden).map(readStory)));
   document.getElementById("speech-stop")?.addEventListener("click", stopSpeech);

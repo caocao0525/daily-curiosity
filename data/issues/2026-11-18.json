@@ -9,10 +9,10 @@
       "source": "PubMed citation",
       "topic": "Genomics & Epigenomics",
       "group": "research",
-      "headline": "Computational and experimental strategies for functional validation of non-coding variants in pancreatic cancer",
-      "brief": "This review discusses computational and experimental methods to identify and validate functional non-coding variants in pancreatic ductal adenocarcinoma (PDAC). It covers in silico techniques like GWAS fine-mapping, colocalization, machine learning-driven annotation, and epigenomic profiling methods such as ATAC-seq and ChIP-seq to define regulatory elements. The work addresses challenges in interpreting the vast non-coding variant landscape affecting gene regulation in PDAC.",
-      "why": "It provides a comprehensive, rigorous overview of computational genomics and epigenomics methods tailored to non-coding variant functional analysis in a cancer context, directly relevant to computational genomics research.",
-      "korean": "췌장암에서 비암호화 변이 기능 검증을 위한 계산 및 실험 전략을 종합적으로 다룹니다.",
+      "headline": "Computational and experimental methods to validate non-coding variants in pancreatic cancer",
+      "brief": "Pancreatic ductal adenocarcinoma (PDAC) exhibits extensive genomic heterogeneity with many non-coding variants potentially affecting gene regulation. This review outlines computational techniques such as GWAS fine-mapping, colocalization, and machine learning-driven functional annotation, alongside epigenomic profiling methods like ATAC-seq and ChIP-seq, to identify and validate functional non-coding variants in PDAC.",
+      "why": "It provides a comprehensive framework integrating computational genomics and epigenomics to functionally characterize non-coding variants in a cancer type with complex regulation, directly relevant to computational genomics and regulatory element analysis.",
+      "korean": "췌장암에서 비암호화 변이의 기능적 중요성을 검증하는 계산 및 실험적 방법을 제시한다.",
       "evidence_note": ""
     },
     {
@@ -23,10 +23,10 @@
       "source": "PubMed citation",
       "topic": "Genomics & Epigenomics",
       "group": "research",
-      "headline": "Artificial intelligence aids multi-omics data integration in cancer drug discovery and development: from targets to drug synergy",
-      "brief": "This article reviews AI methods for integrating multi-omics data—genomic, transcriptomic, epigenomic, proteomic, and metabolomic—to characterize cancer complexity. It highlights AI’s role in target identification, drug response prediction, toxicity assessment, and drug combination modeling. The review notes that foundation models support some representation learning tasks but their advantages in perturbation prediction remain limited, emphasizing the complementary value of diverse omics layers.",
-      "why": "It rigorously surveys AI-driven multi-omics integration approaches in cancer, relevant for computational genomics and biological foundation models, emphasizing challenges and opportunities in drug discovery.",
-      "korean": "암 연구에서 다중 오믹스 데이터 통합에 AI가 어떻게 활용되는지 체계적으로 검토합니다.",
+      "headline": "AI-enabled multi-omics integration advances cancer drug discovery and synergy prediction",
+      "brief": "This review discusses how artificial intelligence methods integrate multi-omics data—including genomic, transcriptomic, epigenomic, proteomic, and metabolomic layers—to characterize cancer complexity. It highlights AI's role in target identification, drug response prediction, toxicity assessment, and modeling drug combinations, emphasizing the complementary biological information from diverse omics and the emerging use of foundation models.",
+      "why": "It addresses broadly transferable machine learning approaches for integrating multi-omics data in cancer, a key area in computational genomics and biological foundation models.",
+      "korean": "암 연구에서 다중 오믹스 데이터를 AI로 통합해 약물 발견과 시너지 예측을 향상시킨다.",
       "evidence_note": ""
     },
     {
@@ -37,10 +37,10 @@
       "source": "PubMed citation",
       "topic": "Genomics & Epigenomics",
       "group": "research",
-      "headline": "Explainable AI identifies recombination and chromatin environment as key predictors of subgenome evolution in maize and Brassica",
-      "brief": "Using maize and Brassica rapa allopolyploids, this study compiles genomic and epigenomic features to classify genes by subgenome identity via supervised machine learning and explainable AI (XAI). It finds recombination rate as the most influential feature, interconnected with chromatin marks like H3K9ac and H3K27ac, transposon density, and accessible chromatin regions. The work links chromatin environment and recombination to biased gene loss and regulatory rewiring in subgenomes, providing mechanistic insights into 3D genome evolution.",
-      "why": "It applies interpretable machine learning to integrate chromatin and genomic features, revealing key epigenomic determinants of subgenome evolution, directly relevant to computational epigenomics and regulatory element analysis.",
-      "korean": "옥수수와 배추의 아분배체 진화에서 재조합과 염색질 환경이 핵심 예측인자임을 XAI로 규명했습니다.",
+      "headline": "Explainable AI reveals recombination and chromatin features as key predictors of subgenome evolution in maize and Brassica",
+      "brief": "Using supervised machine learning and explainable AI on genomic and epigenomic data from maize and Brassica rapa, the study identifies recombination rate as the most influential feature predicting subgenome identity. Other top contributors include chromosome location, transposon density, and chromatin marks like H3K9ac and H3K27ac. The findings link chromatin environment and recombination to biased gene loss and regulatory rewiring after polyploidy.",
+      "why": "It applies interpretable machine learning to integrate genomics and epigenomics, elucidating chromatin and recombination determinants of genome evolution, relevant to computational genomics and regulatory element function.",
+      "korean": "설명 가능한 AI로 옥수수와 배추의 하위 게놈 진화를 예측하는 주요 인자로 재조합과 염색질 특성을 밝힌다.",
       "evidence_note": ""
     },
     {
@@ -51,39 +51,11 @@
       "source": "PubMed citation",
       "topic": "Neuroscience & Evolutionary Psychology",
       "group": "general",
-      "headline": "Early self-regulation in context: Multidimensional organization of neonatal non-nutritive sucking and its association with subclinical maternal depressive traits",
-      "brief": "This study examines neonatal non-nutritive sucking (NNS), an early regulatory behavior, and its association with maternal subclinical depressive symptoms. Using principal component analysis, the authors characterize the spontaneous organization of NNS in newborns and find that individual differences in NNS correlate with maternal postnatal depressive traits, suggesting early infant self-regulation is influenced by maternal affective context.",
-      "why": "It offers an intriguing developmental neuroscience perspective linking early epigenetic-like regulation of infant behavior to maternal psychological states, relevant for evolutionary psychology and neurodevelopmental computational models.",
-      "korean": "신생아의 비영양적 빨기 행동과 산후 우울 증상 간 연관성을 밝혔습니다.",
-      "evidence_note": "Preprint-level evidence; observational study."
-    },
-    {
-      "title": "Waist inequality and a Hurewicz-type theorem for mean dimension",
-      "url": "https://arxiv.org/abs/2611.22390v1",
-      "summary": "We establish a Hurewicz-type inequality relating mean dimension and conditional metric mean dimension. For every equivariant continuous map between dynamical systems, the mean dimension of the domain is bounded above by the sum of the mean dimension of the target and the conditional metric mean dimension of the map. In particular, any equivariant continuous map that decreases mean dimension must have infinite topological conditional entropy. The key ingredient is a new waist inequality, which we believe is of independent geometric interest beyond its application to dynamical systems. Compared with Gromov's original waist inequality, a distinctive feature of this inequality is that it applies to finite simplicial complexes of arbitrary topology, subject only to dimensional restrictions.",
-      "published": "2026-11-17",
-      "source": "arXiv preprint",
-      "topic": "Mathematics",
-      "group": "general",
-      "headline": "Waist inequality and a Hurewicz-type theorem for mean dimension",
-      "brief": "This paper proves a Hurewicz-type inequality relating mean dimension and conditional metric mean dimension in dynamical systems. It shows that for any equivariant continuous map, the mean dimension of the domain is bounded by the sum of the mean dimension of the target and the conditional metric mean dimension of the map. The authors also establish a new waist inequality applicable to finite simplicial complexes of arbitrary topology, which may have broader geometric implications beyond dynamical systems.",
-      "why": "It advances rigorous mathematical foundations of mean dimension theory and provides a novel geometric inequality, valuable for researchers in computational topology and dynamical systems.",
-      "korean": "평균 차원과 조건부 평균 차원 사이의 새로운 부등식을 증명했습니다.",
-      "evidence_note": ""
-    },
-    {
-      "title": "This Is Your Brain on Art - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOSElRTmV6VEhJWWduUWZVcFpKVXpwSTVOUVhIaC10cDNFbFp5aFpEZUlpaXdvWl82eXdtVW95YTZLUFRGNDVOajZYYm9wYTdwYVFoOVp6bkVSY2RPN0xhNzBraENtTk95Q0NCTXFFcmdHUktDbTEyNFZQaEpFU2tHZA?oc=5",
-      "summary": "This Is Your Brain on Art &nbsp;&nbsp; The New York Times",
-      "published": "2026-10-26",
-      "source": "News headline / RSS snippet",
-      "topic": "Art & Art History",
-      "group": "general",
-      "headline": "This Is Your Brain on Art",
-      "brief": "This New York Times article explores how engaging with art affects brain function, highlighting neuroscience research on aesthetic experience, emotional response, and cognitive processing during art perception. It discusses how art activates reward circuits and modulates attention and memory, providing insights into the biological basis of artistic appreciation.",
-      "why": "It offers a rigorous synthesis of neuroscience findings on art perception, relevant for computational genomics researchers interested in neuroscience and evolutionary psychology of aesthetics.",
-      "korean": "예술 감상이 뇌 기능에 미치는 영향을 신경과학 연구를 통해 설명합니다.",
-      "evidence_note": "General science journalism; not primary research."
+      "headline": "Neonatal non-nutritive sucking organization associates with subclinical maternal depressive traits",
+      "brief": "This study characterizes neonatal non-nutritive sucking (NNS), an early regulatory behavior, and examines its association with maternal subclinical depressive symptoms measured by the Edinburgh Postnatal Depression Scale. Using principal component analysis on newborns' NNS data, the authors find that individual differences in NNS organization relate to maternal depressive traits, suggesting early infant regulatory behavior is influenced by maternal affective state.",
+      "why": "It provides novel insights into early neurodevelopmental regulation linked to maternal psychological factors, relevant to neuroscience and evolutionary psychology.",
+      "korean": "신생아의 비영양적 빨기 행동이 어머니의 경미한 우울 증상과 연관됨을 보여준다.",
+      "evidence_note": "Preprint status not indicated; interpret with typical caution for observational studies."
     }
   ]
 }
