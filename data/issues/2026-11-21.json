@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-21",
+  "items": [
+    {
+      "title": "OMIGAT: Multi-Feature Enhanced Collaborative Attention and Graph Convolution Model for Cancer Driver Gene Identification.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43062793/",
+      "summary": "Journal: Interdisciplinary sciences, computational life sciences. Abstract: Human cancers encompass a diverse spectrum of malignancies characterized by extensive molecular diversity, heterogeneous biological behaviors, and distinct evolutionary trajectories. The identification and characterization of cancer driver genes (CDGs) constitute a critical step toward advancing precision oncology and individualized treatment. However, noise interference in multi-omics data, the incompleteness of prior biological networks, and complex topological structures constrain the predictive performance of existing deep learning models. To address these challenges, this study proposes OMIGAT-Omics Multi-modal Integration via Collaborative Attention Transformer and Graph Convolution-a global-local collaborative modeling framework designed for multi-omics noise and complex biological network topology. Specifically, OMIGAT first integrates genomic, transcriptomic, and epigenomic data through a topology-aware multi-omics representation enhancement module and incorporates label-independent topological priors to improve the robustness of gene representations against multi-omics noise while strengthening the representation of hub genes and local functional modules. The model then employs a dual-path learning architecture that operates in parallel at global and local scales. The global representation learner constructs a feature-similarity graph from the enhanced multi-omics representations to capture macro-level long-range functional associations that may be absent from prior biological networks. In contrast, the local structure encoder characterizes micro-level neighborhood topological patterns and functionally related modular structures under biological network constraints, thereby reducing the impact of noisy edges on information propagation. Macro-level functional associations and micro-level neighborhood topology provide complementary discriminative information, which is dynamically integrated through an adaptive fusion mechanism to balance the contributions of global functional similarity and local network structure to CDG prediction. Experimental results show that OMIGAT achieves an AUC of 87.46% on the PPNet dataset, demonstrating strong predictive performance in identifying known CDGs.",
+      "published": "2026-11-20",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "OMIGAT: Multi-Feature Enhanced Collaborative Attention and Graph Convolution Model for Cancer Driver Gene Identification",
+      "brief": "OMIGAT integrates genomic, transcriptomic, and epigenomic data using a topology-aware multi-omics representation enhancement module and collaborative attention transformer with graph convolution to identify cancer driver genes. It addresses noise in multi-omics data and incomplete biological networks to improve predictive performance in cancer genomics.",
+      "why": "This method advances multi-omics integration with topology-aware transformers and graph convolutions, offering improved cancer driver gene identification relevant to computational genomics and biological foundation models.",
+      "korean": "OMIGAT는 다중 오믹스 데이터를 통합해 암 유전자 식별을 향상시킨다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Reference-Guided De Novo Retrieval of 3D Chromatin Organizational Features with Representation Learning.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43060082/",
+      "summary": "Journal: bioRxiv : the preprint server for biology. Abstract: Chromosome conformation maps reveal spatial genome organization through recurring contact patterns, some associated with established architectural features and others with less understood biological processes. Identifying instances of a pattern across these maps is necessary to investigate its biological associations and recurrence across experimental settings. However, conventional feature callers typically target predefined patterns, offering limited support when researchers can provide examples of a feature of interest but lack a dedicated detection method. We introduce Chromatin Fetch (C-Fetch), a reference-guided retrieval framework that uses examples of a desired feature and a contrasting class to rank and assign contact-map patches at provided candidate coordinates. C-Fetch learns a generalized representation through weakly KL-regularized 3D autoencoding of structurally related, non-temporal Hi-C and Micro-C patches without architectural feature labels. We demonstrate retrieval of biologically defined contacts, visually specified patterns, and established architectural features. Polycomb-guided retrieval identifies contacts enriched for PRC2-associated signals, exceeding enrichment from loop-guided assignments at 5 kb, while queries resembling condensed domains retrieve patches with progressively stronger rectangular enrichment at higher ranks. Loop-guided retrieval increases aggregate focal enrichment relative to complete Mustache proposal sets across four held-out maps, and selected contacts show greater focality loss after cohesin depletion than matched remaining candidates. Retrieval also extends to Region Capture Micro-C and HiChIP, with ranking agreement retained across biological replicates and reduced sequencing depths. Together, these results establish reference examples as a flexible means of specifying contact-map features of interest, enabling biological investigation, exploration of visual patterns, and refinement of existing calls across datasets and technologies.",
+      "published": "2026-11-04",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "Reference-Guided De Novo Retrieval of 3D Chromatin Organizational Features with Representation Learning",
+      "brief": "Chromatin Fetch (C-Fetch) is a reference-guided retrieval framework that learns generalized representations of 3D chromatin contact map patches via weakly regularized 3D autoencoding. It ranks and assigns contact-map patches based on examples of desired features, enabling discovery of biologically defined chromatin contacts without predefined feature callers.",
+      "why": "C-Fetch provides a novel, representation-learning-based method to identify 3D chromatin features from contact maps, advancing computational epigenomics and regulatory element analysis.",
+      "korean": "C-Fetch는 3D 염색질 특징을 학습 기반으로 탐색하는 새로운 방법이다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "From Sequence Uncertainty to Phenotype Hypotheses: Uncertainty-Conditioned Inference over Biomedical Knowledge Graphs",
+      "url": "https://arxiv.org/abs/2611.25422v1",
+      "summary": "Genomic foundation models provide variant-level evidence, but connecting that evidence to phenotype hypotheses requires accounting for uncertainty throughout structured reasoning. We introduce an uncertainty-conditioned path-energy framework that converts sequence predictions and calibrated predictive uncertainty into explicit distributions over graph-supported phenotype hypotheses, without patient-level phenotype supervision. An interpretable learned energy scores admissible gene--disease--phenotype routes, query uncertainty controls the target temperature, and path probabilities are aggregated into phenotype hypotheses. This formulation makes evidence quality an explicit determinant of hypothesis breadth while retaining traceable multi-path support. Exact normalization over enumerable candidate sets provides a reference for evaluating a Hastings-corrected learned revision operator. On AlzKB and Hetionet, phenotype-level entropy tracks upstream uncertainty, with Spearman correlations of 0.951 and 0.878, respectively; ablations identify the contribution of uncertainty conditioning. In masked-edge recovery, the model exceeds chance and degree-matched probability-permutation controls. Training the energy under the uncertainty-dependent temperature yields higher held-out recall@10 than training under a constant temperature of comparable magnitude. Under gene hold-out, recall@10 exceeds that of a trained DistMult embedding on 24 of 30 graph masks (0.183 versus 0.123); this difference is attributable mainly to three genes with many variants and is not established for all genes. These results establish an uncertainty-aware interface from genomic predictions to graph-supported phenotype hypotheses that combines interpretable probability allocation with held-out association recovery of explicitly stated scope.",
+      "published": "2026-11-19",
+      "source": "arXiv preprint",
+      "topic": "Biological Foundation Models",
+      "group": "research",
+      "headline": "From Sequence Uncertainty to Phenotype Hypotheses: Uncertainty-Conditioned Inference over Biomedical Knowledge Graphs",
+      "brief": "This work introduces an uncertainty-conditioned path-energy framework that integrates genomic foundation model predictions with calibrated uncertainty into distributions over phenotype hypotheses via biomedical knowledge graphs. It enables interpretable, uncertainty-aware reasoning from variant-level evidence to phenotype-level hypotheses without patient-level supervision.",
+      "why": "The method advances biological foundation models by explicitly incorporating uncertainty into structured phenotype inference, enhancing interpretability and robustness in computational genomics.",
+      "korean": "불확실성을 반영한 생물학적 지식 그래프 기반 표현 추론 방법이다.",
+      "evidence_note": "Preprint; interpretability and uncertainty conditioning in phenotype inference are promising but require further validat"
+    },
+    {
+      "title": "Neural Conditional Gaussian Model: Efficient Data Assimilation with Sequential Uncertainty Quantification for Nonlinear Dynamics",
+      "url": "https://arxiv.org/abs/2611.26463v1",
+      "summary": "Data assimilation (DA) in partially observed nonlinear systems requires repeated estimation of both hidden states and their uncertainty. Conventional nonlinear filtering can be computationally expensive and often relies on an explicit dynamical model. In this paper, we develop the Neural Conditional Gaussian Model (Neural CGM), a data-driven dynamical model that maps unobserved physical states into a learned latent space, where the dynamics of the latent states follow a conditional Gaussian structure. This structure allows closed-form DA updates in the latent space, while nonlinear encoder-decoder mappings retain the flexibility needed to represent complex dynamics in physical space. A key feature of Neural CGM is its treatment of uncertainty in DA. The latent posterior mean and covariance are mapped to the physical variables through a Gaussian decoder that combines local moment propagation with learned nonlinear corrections. The resulting physical-space posterior statistics depend on the sequentially updated latent distribution rather than on a separate post-processing estimate. The same statistics enter a Gaussian negative log-likelihood during training, so both the posterior mean and uncertainty affect the learned model. Because Neural CGM learns the dynamical model itself, it can also be used for state forecasting and simulation without explicit knowledge of the governing equations. Numerical experiments on benchmark nonlinear dynamical systems show accurate state estimation and forecasting while substantially reducing online assimilation cost relative to conventional nonlinear DA methods. Neural CGM is therefore suited to repeated state estimation, uncertainty quantification, and prediction from partial observations.",
+      "published": "2026-11-19",
+      "source": "arXiv preprint",
+      "topic": "Mathematics",
+      "group": "general",
+      "headline": "Neural Conditional Gaussian Model: Efficient Data Assimilation with Sequential Uncertainty Quantification for Nonlinear Dynamics",
+      "brief": "Neural CGM is a data-driven dynamical model mapping unobserved physical states into a latent space with conditional Gaussian dynamics, enabling closed-form data assimilation updates. It uses nonlinear encoder-decoder mappings to represent complex dynamics and propagates uncertainty through a Gaussian decoder, allowing sequential uncertainty quantification in physical space for nonlinear systems.",
+      "why": "Neural CGM advances computational genomics and biological modeling by enabling efficient, uncertainty-aware data assimilation in nonlinear dynamical systems.",
+      "korean": "Neural CGM은 비선형 동역학의 불확실성을 고려한 데이터 동화 모델이다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Dynamical edge universality and the Airy$_β$ line ensemble",
+      "url": "https://arxiv.org/abs/2611.25364v1",
+      "summary": "We prove dynamical edge universality for three families of interacting particle systems for every $β>0$: $β$-Dyson Brownian motion with an analytic potential, weighted $β$-corners processes, and a class of discrete-time Markov chains. Our results apply to general non-equilibrium initial data and show that the Airy$_β$ line ensemble emerges at positive times whenever the limiting density has a regular square-root edge. More precisely, after centering at the moving deterministic edge and rescaling space and time on the $n^{-2/3}$ and $n^{-1/3}$ scales, respectively, the trajectories of the top $k$ particles converge jointly in distribution to the top $k$ curves of the Airy$_β$ line ensemble, for every fixed $k$, in the topology of uniform convergence on compact time intervals. The proof combines dynamical loop equations with characteristic-flow estimates to establish local laws near the moving edge and upper bounds on the extremal particle. We then identify the stochastic evolution of every subsequential limit of the rescaled Stieltjes transform and establish convergence through the pole-evolution characterization of the Airy$_β$ line ensemble.",
+      "published": "2026-11-19",
+      "source": "arXiv preprint",
+      "topic": "Mathematics",
+      "group": "general",
+      "headline": "Dynamical edge universality and the Airy$_β$ line ensemble",
+      "brief": "This work proves dynamical edge universality for $β$-Dyson Brownian motion, weighted $β$-corners processes, and related Markov chains for all $β>0$. After centering and rescaling near the spectral edge, the top $k$ particle trajectories converge jointly to the Airy$_β$ line ensemble with uniform convergence on compact time intervals. The proof combines dynamical loop equations, local laws, and stochastic evolution identification.",
+      "why": "The result rigorously establishes universal scaling limits in random matrix dynamics, foundational for computational genomics methods involving spectral data and biological foundation models.",
+      "korean": "임의 행렬 동역학의 가장자리 보편성에 관한 엄밀한 증명이다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "The Met to Present First Comprehensive Exhibition Dedicated to Rembrandt’s Lifelong Engagement with the Ancient World - The Metropolitan Museum of Art",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9MeXpZNVF3dDhjbWVCeV9JaFhmT1c1d1ZkYmMwWmdSS0tSVWRBTURCTGRNWUZYcWVDZDc4T3g5UjFNZHFxbGFTb0s0UVNvdzJ6dVRITkc1T3hLTGlmbGU2TGZpN2dyX1l3SWRR?oc=5",
+      "summary": "The Met to Present First Comprehensive Exhibition Dedicated to Rembrandt’s Lifelong Engagement with the Ancient World &nbsp;&nbsp; The Metropolitan Museum of Art",
+      "published": "2026-10-15",
+      "source": "News headline / RSS snippet",
+      "topic": "Art & Art History",
+      "group": "general",
+      "headline": "The Met to Present First Comprehensive Exhibition Dedicated to Rembrandt’s Lifelong Engagement with the Ancient World",
+      "brief": "The Metropolitan Museum of Art will present its first comprehensive exhibition dedicated to Rembrandt's lifelong engagement with the ancient world, showcasing how classical antiquity influenced his art throughout his career.",
+      "why": "This exhibition offers deep insights into the intersection of fine art and historical cultural influences, enriching understanding of artistic evolution and heritage.",
+      "korean": "메트로폴리탄 미술관에서 렘브란트의 고대 세계와의 평생 교류를 조명하는 전시를 개최한다.",
+      "evidence_note": ""
+    }
+  ]
+}
