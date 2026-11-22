@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-22",
+  "items": [
+    {
+      "title": "IsoAlign: Isoform-Aware DNA-Protein Alignment via Joint-Embedding Predictive Architectures",
+      "url": "https://arxiv.org/abs/2611.00241v1",
+      "summary": "Genomic foundation models (GFMs) have emerged as a powerful paradigm for learning DNA sequence representations, yet existing self-supervised pretraining strategies overlook alternative splicing and underperform compared to specialized models. To address this gap, we introduce IsoAlign, a multimodal framework that grounds genomic pretraining in isoform-aware DNA-protein alignment to learn biologically meaningful representations. IsoAlign aligns transcripts to their corresponding protein isoforms, capturing both coding sequences and broader regulatory contexts, using two Joint-Embedding Predictive Architectures (JEPA): DNA-Protein JEPA (DP-JEPA), which predicts protein representations from DNA using contrastive alignment, and Isoform-Masked JEPA (IM-JEPA), which models relationships among alternative isoforms of the same gene through masked protein prediction. We evaluate the learned DNA representations of these architectures across a multi-metric evaluation suite spanning tasks, including the prediction of pathogenicity, fitness, gene expression, and TF binding. Our results demonstrate that isoform-aware cross-modal alignment using JEPA significantly improves functional representations and downstream performance, establishing a promising direction for GFM pretraining.",
+      "published": "2026-10-30",
+      "source": "arXiv preprint",
+      "topic": "Biological Foundation Models",
+      "group": "research",
+      "headline": "IsoAlign: Isoform-Aware DNA-Protein Alignment via Joint-Embedding Predictive Architectures",
+      "brief": "IsoAlign introduces a multimodal genomic foundation model pretraining approach that aligns DNA sequences with their corresponding protein isoforms, capturing coding and regulatory contexts. It uses two joint-embedding predictive architectures to learn biologically meaningful DNA representations, improving prediction of pathogenicity, fitness, gene expression, and transcription factor binding. This isoform-aware alignment enhances the biological relevance of genomic foundation models.",
+      "why": "This work advances computational genomics by integrating isoform-specific information into DNA-protein embeddings, improving functional predictions and regulatory element modeling.",
+      "korean": "IsoAlign은 DNA와 단백질 아이소폼 간 정렬을 통해 생물학적 의미 있는 표현을 학습한다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Panoramic modelling of single-cell transcriptomes at scale with CellNet",
+      "url": "https://arxiv.org/abs/2610.21943v2",
+      "summary": "Comprehensively characterizing cellular landscapes to elucidate cell diversity is a central goal in biology. Recent advances in single-cell profiling have created unprecedented opportunities for this endeavor by capturing diverse transcriptomes with remarkable breadth. However, current foundation models generally struggle to leverage such holistic and valuable information to represent a cell. Here we present CellNet, which enables panoramic modelling of single-cell transcriptomes at scale by integrating DNA-derived gene identities and measured RNA expression into a shared image representation. Pretrained on 231 million image-based cell profiles across 40 species and covering over one million genes, CellNet improves the recognition of rare and condition-associated cellular states, enables the study of genes beyond experimentally measured panels, and uncovers associations between poorly characterized non-coding RNAs and known biological programmes. CellNet paves the way for AI-enabled cell-biology discovery at the whole-transcriptome scale. The CellNet website is available at https://www.cellnet.top.",
+      "published": "2026-10-15",
+      "source": "arXiv preprint",
+      "topic": "Biological Foundation Models",
+      "group": "research",
+      "headline": "Panoramic modelling of single-cell transcriptomes at scale with CellNet",
+      "brief": "CellNet is a foundation model pretrained on 231 million image-based single-cell profiles across 40 species, integrating DNA-derived gene identities and RNA expression into a shared image representation. It improves recognition of rare and condition-associated cellular states, enables study of genes beyond measured panels, and uncovers associations between non-coding RNAs and biological programs, facilitating AI-enabled cell biology discovery at whole-transcriptome scale.",
+      "why": "CellNet provides a scalable, integrative foundation model for single-cell transcriptomics, enhancing interpretability and discovery in computational genomics and regulatory element analysis.",
+      "korean": "CellNet은 대규모 단일세포 전사체를 통합해 희귀 세포 상태 인식을 개선한다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "What DNA Foundation Models Learn Beyond Sequence Composition",
+      "url": "https://arxiv.org/abs/2610.15711v1",
+      "summary": "Do genomic foundation models (FMs) provide predictive information beyond simple sequence composition? We evaluate frozen representations from five DNA FMs against normalized k-mer frequencies across 57 genomic classification datasets and two exploratory gene-expression regression tasks. Simple k-mer features remain competitive with most models, whereas NTv3 shows a consistent advantage; the ranking is robust to globally fixed and multi-scale k-mer baselines and alternative downstream probes. To test incremental predictive utility directly, we compare global 6-mer features with their concatenation with each FM embedding under a matched Random Forest protocol. NTv3 improves 46 of 57 datasets (mean $Δ$MCC = +0.072), while Caduceus provides smaller gains and the other models do not improve mean MCC. We separately decompose embeddings into a component linearly predictable from 6-mer frequencies and a ridge residual, finding that linear recoverability does not reliably indicate downstream utility. Exact 6-mer-preserving shuffles further reveal task-relevant sequence-order sensitivity, most pronounced for NTv3, although order sensitivity alone does not guarantee predictive improvements. Our results establish compositional features as essential controls and offer complementary diagnostics for evaluating the added value of frozen genomic representations, without making claims about fine-tuning capacity.",
+      "published": "2026-10-11",
+      "source": "arXiv preprint",
+      "topic": "Biological Foundation Models",
+      "group": "research",
+      "headline": "What DNA Foundation Models Learn Beyond Sequence Composition",
+      "brief": "This study evaluates frozen embeddings from five DNA foundation models against k-mer frequency baselines across 57 genomic classification datasets and gene-expression tasks. It finds that simple k-mer features remain competitive, but the NTv3 model consistently outperforms them. Decomposing embeddings reveals that linear predictability from k-mers does not guarantee downstream utility, and sequence-order sensitivity is task-relevant. Thus, foundation models capture functional patterns beyond simple sequence composition.",
+      "why": "This work rigorously quantifies the incremental predictive value of genomic foundation models beyond classical k-mer features, informing model selection and interpretation in computational genomics.",
+      "korean": "DNA 기초 모델은 단순 서열 구성 이상의 기능적 패턴을 포착한다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Brain-inspired low-rank spiking neural networks for aircraft control with manifold representation reinforcement learning.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43067935/",
+      "summary": "Journal: Cognitive neurodynamics. Abstract: Achieving stable and rapid aircraft attitude control under flight uncertainty and external disturbance remains a challenging task. To address this problem, this paper proposes a manifold representation reinforcement learning framework based on a Low-rank recurrent spiking neural network (LRRSNN). The framework integrating biological plausibility of LRRSNN with manifold learning method leverages low-rank connectivity and small-world topology to improve the efficiency and robustness of controller. To enhance training stability, we design a geometric constraint mechanism that incorporates Riemannian gradient descent. It is shown that the attitude controller based on proposed framework achieves superior performance compared to baseline methods, with a steady-state error below [Formula: see text] and a rapid settling time below 0.5 s. Moreover, the attitude controller exhibits strong robustness and stable control performance under severe disturbances and parameter uncertainties. Analysis of network dynamics reveals that high-dimensional neural activity generated by LRRSNN for control decision-making lies on low-dimensional manifold. The geometry of manifold is closely associated with control performance. These findings demonstrate control mechanism underlying dynamic response of the aircraft attitude control system and provide a reference for design and optimization of aircraft attitude controllers.",
+      "published": "2026-11-20",
+      "source": "PubMed citation",
+      "topic": "Neuroscience & Evolutionary Psychology",
+      "group": "general",
+      "headline": "Brain-inspired low-rank spiking neural networks for aircraft control with manifold representation reinforcement learning",
+      "brief": "This study proposes a low-rank recurrent spiking neural network (LRRSNN) integrated with manifold representation reinforcement learning for stable and rapid aircraft attitude control under uncertainty and disturbances. The approach leverages biological plausibility, low-rank connectivity, and small-world topology, achieving superior performance with rapid settling time and robustness. Network dynamics analysis reveals high-dimensional neural activity encoding control signals.",
+      "why": "It demonstrates a biologically inspired computational model with potential applications in control systems, linking neuroscience principles with reinforcement learning.",
+      "korean": "뇌 영감을 받은 저차원 스파이킹 신경망이 항공기 제어에 효과적이다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Colorimetric sensor arrays and artificial intelligence for natural product quality evaluation: From cross-reactive fingerprints to analytical validation.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42967395/",
+      "summary": "Journal: Talanta. Abstract: Natural products encompass traditional Chinese medicines, herbal medicines, teas, food-derived plant materials, plant extracts, and naturally occurring bioactive compounds. Their rapid identification and quality evaluation require a balance among integrative characterization, analytical accuracy, and field accessibility. Empirical authentication methods are difficult to quantify and reproduce, whereas confirmatory techniques based on chromatography, mass spectrometry, and spectroscopy, although analytically reliable, cannot fully meet the frequent demands of on-site screening, process monitoring, and risk triage. A colorimetric sensor array (CSA) generates sample-specific color fingerprints through cross-reactive responses across multiple sensing elements. Combined with standardized image acquisition, feature extraction, and chemometric or machine-learning analysis, CSA-based workflows can support classification, quantitative prediction, and anomaly detection. This integrated strategy is referred to here as CSA-AI, an umbrella term that does not equate conventional chemometrics with artificial intelligence (AI). This review critically examines CSA design, color-data acquisition, chemometric and AI-assisted analysis, analytical validation, and applications in natural product quality evaluation along the chain of \"array response-color fingerprint-computational interpretation-quality decision-making.\" Particular attention is given to authentic complex matrices, sample-level data partitioning, data leakage, independently sourced external evaluation, cross-device transfer, validation evidence, model interpretability, and confirmation by established analytical methods. Current direct visible-CSA evidence is strongest for authentication and preliminary adulteration screening, whereas process monitoring, storage-deterioration warning, and field deployment remain less thoroughly validated. Current evidence supports CSA-AI primarily as a complementary tool for rapid screening, risk warning, and auxiliary grading rather than as a replacement for confirmatory methods such as HPLC, GC-MS, and LC-MS.",
+      "published": "2026-10-28",
+      "source": "PubMed citation",
+      "topic": "Neuroscience & Evolutionary Psychology",
+      "group": "general",
+      "headline": "Colorimetric sensor arrays and artificial intelligence for natural product quality evaluation: From cross-reactive fingerprints to analytical validation",
+      "brief": "This review discusses colorimetric sensor arrays (CSA) combined with AI (CSA-AI) as a rapid, integrative approach for natural product identification and quality evaluation. CSA generates sample-specific color fingerprints via cross-reactive sensing elements, and AI methods enable classification, quantification, and anomaly detection. CSA-AI balances integrative characterization, analytical accuracy, and field accessibility, complementing traditional chromatographic and spectroscopic methods.",
+      "why": "It highlights an innovative, AI-driven analytical approach for natural product quality control, relevant for computational methods in chemical and biological data analysis.",
+      "korean": "색변환 센서 배열과 AI가 천연물 품질 평가에 혁신적 방법을 제공한다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "The Taylor Swift Museum Exhibition Is an SOS Call - The Atlantic",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQRXhLY0M5NkJjVEJ3Q3hXemlIM0Z6Q0pkNnJaZUNBVk4wV3phdWlvb2daTE1DOE5tc25NVlQ5Yl9HbThEOGR1ejZ1dGVFem1YWXZlQWhMWjR5djZtZTJEeHZ1YkhRQkktWlRmeDdwbXNkRzBvMlVxdEpudmw5R0RoVXV5NU4?oc=5",
+      "summary": "The Taylor Swift Museum Exhibition Is an SOS Call &nbsp;&nbsp; The Atlantic",
+      "published": "2026-11-20",
+      "source": "News headline / RSS snippet",
+      "topic": "Art & Art History",
+      "group": "general",
+      "headline": "The Taylor Swift Museum Exhibition Is an SOS Call",
+      "brief": "The Taylor Swift Museum Exhibition is described as a cultural event that serves as a call for awareness or action, emphasizing the significance of the artist's impact and the exhibition's role in contemporary art discourse.",
+      "why": "This exhibition exemplifies how popular culture and fine art intersect, reflecting evolving narratives in art history and public engagement.",
+      "korean": "테일러 스위프트 전시는 대중문화와 미술의 교차점을 보여준다.",
+      "evidence_note": ""
+    }
+  ]
+}
