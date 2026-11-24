@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-24",
+  "items": [
+    {
+      "title": "Deep learning inference of plant GRNs at single-cell level: from cis-elements to spatially programmable promoters.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43076036/",
+      "summary": "Journal: Journal of experimental botany. Abstract: Plant regulatory logic emerges from the interaction of cis-regulatory elements, chromatin state, transcription factors, cell identity, and microenvironmental context. This review synthesizes how single-cell and single-nucleus genomics, spatial omics, deep learning, and perturbation frameworks are converging to resolve that logic in plants. We discuss chromatin-first and sequence-informed strategies for discovering candidate cis-regulatory elements, compare major approaches for inferring single-cell gene regulatory networks, and evaluate the promise and limitations of interpretable deep learning and foundation models in data-limited plant systems. We then examine how spatial biology reconnects regulatory inference to tissue geometry, signaling context, and microenvironmental structure, and how perturbation platforms, reporter assays, CRISPRa/i, and programmable promoter engineering can be used to functionally test regulatory predictions. Together, these developments support a transition from descriptive atlases toward iterative design-test-learn frameworks in which candidate elements, networks, and perturbations can be prioritized, validated, and refined across molecular, cellular, and tissue scales.",
+      "published": "2026-11-24",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "Deep learning inference of plant gene regulatory networks at single-cell resolution",
+      "brief": "This review synthesizes advances in single-cell and spatial genomics, deep learning, and perturbation methods to infer plant gene regulatory networks (GRNs). It discusses chromatin-first and sequence-informed strategies to discover cis-regulatory elements, evaluates interpretable deep learning and foundation models in data-limited plant systems, and highlights spatial biology's role in connecting regulatory inference to tissue context. Functional testing via CRISPRa/i and programmable promoters is also examined, supporting a transition from descriptive atlases to iterative design.",
+      "why": "It directly addresses computational genomics and regulatory element inference with deep learning and foundation models, relevant to epigenomics and ML methods.",
+      "korean": "식물 단일세포 수준에서 유전자 조절 네트워크를 딥러닝으로 추론하는 최신 방법을 정리했습니다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Genomic, single-cell, and functional profiling of the CD48-CD244 axis and NK cell dysfunction in multiple myeloma.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43001584/",
+      "summary": "Journal: JCI insight. Abstract: Multiple myeloma (MM) orchestrates immune evasion by subverting natural killer (NK) cell function. CD48, one of the most abundant NK ligands on MM cells, paradoxically enhances NK cell activation yet is associated with high-risk cytogenetics and poor patient survival. We integrated multiomics (bulk and single-cell RNA-seq, assay for transposase-accessible chromatin using sequencing [ATAC-seq], chromatin immunoprecipitation sequencing [ChIP-seq]), genome-wide CRISPR knockout/activation screens, and machine learning to dissect CD48 regulation and function. In human MM and Vκ*MYC mouse scRNA-seq datasets, NK cells exhibit stepwise increases in inflammatory and exhaustion signatures and loss of cytotoxic potential as disease progresses. In vitro coculture assays show that CD48 overexpression on MM enhances NK cell cytokine secretion, whereas chronic exposure leads to ex vivo NK dysfunction. In vivo, CD48-overexpressing Vκ*MYC tumors progress more slowly and extend host survival, while NK cell depletion accelerates disease. These findings support a context-dependent role for CD48, potentiating acute NK responses while coexisting with chronic NK exhaustion, and suggest strategies to modulate CD48 for therapeutic benefit.",
+      "published": "2026-11-09",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "Multiomics and machine learning dissect CD48-CD244 axis and NK cell dysfunction in multiple myeloma",
+      "brief": "Using integrated bulk and single-cell RNA-seq, ATAC-seq, ChIP-seq, genome-wide CRISPR screens, and machine learning, this study elucidates the regulation and function of the CD48-CD244 axis in multiple myeloma (MM). CD48 overexpression enhances NK cell activation but chronic exposure leads to NK dysfunction. In vivo, CD48-overexpressing tumors progress slower, and NK depletion accelerates disease, indicating context-dependent immune evasion mechanisms. This multiomics approach reveals regulatory and functional insights into NK cell dysfunction in MM.",
+      "why": "It applies multiomics and machine learning to dissect chromatin and regulatory mechanisms in a hematologic malignancy, relevant to computational genomics and biological foundation models.",
+      "korean": "다중오믹스와 머신러닝으로 다발골수종에서 NK세포 기능장애를 조절하는 CD48-CD244 축을 규명했습니다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Learning Multimodal Representations from Partially Paired, Small-Scale Data",
+      "url": "https://arxiv.org/abs/2611.30601v1",
+      "summary": "Modeling multimodal data from partially paired samples is critical for advancing domains like biomedicine, where vast unimodal datasets and foundation models exist but paired data remains scarce. Existing fusion methods rely on large-scale paired datasets, limiting their use in scenarios with incomplete pairing. We introduce CAMEO, an adversarial learning-based modality fusion framework that integrates modalities from small, partially paired datasets. Combining any pre-trained unimodal encoder with a cross-modal latent alignment mechanism, CAMEO learns shared representations requiring only minimal paired samples. Evaluated on computational pathology tasks such as niche classification and cell type composition prediction, CAMEO achieves superior data efficiency, outperforming contrastive approaches like CLIP in low paired-data regimes, and highlighting the benefits of adversarial alignment when paired annotations are scarce. To facilitate further research, we additionally release a fully annotated HuggingFace dataset comprising three organs and paired image and gene expression modalities. By extending fusion methods to address limited pairing and small-scale datasets, we provide a framework that advances multimodal learning and broadens its applicability to real-world biomedical problems.",
+      "published": "2026-11-23",
+      "source": "arXiv preprint",
+      "topic": "Biological Foundation Models",
+      "group": "research",
+      "headline": "CAMEO: Adversarial fusion of multimodal biomedical data from small, partially paired datasets",
+      "brief": "CAMEO is an adversarial learning framework that fuses multimodal biomedical data from small, partially paired datasets by integrating pretrained unimodal encoders with cross-modal latent alignment. Evaluated on computational pathology tasks like niche classification and cell type prediction, CAMEO outperforms contrastive methods such as CLIP in low paired-data regimes, demonstrating superior data efficiency. The approach enables learning shared representations with minimal paired samples, facilitating multimodal integration where paired data is scarce.",
+      "why": "It introduces a broadly transferable adversarial multimodal fusion method relevant to biological foundation models and computational genomics.",
+      "korean": "소규모 부분쌍 데이터에서 다중모달 표현을 적은 쌍 데이터로 효과적으로 융합하는 적대적 학습 방법입니다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Colombia’s government sparks backlash with museum art purge - NPR",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNU1JxdTREUTdzdnZnYlF1Tmt0bXNGY0ZmSzRSV2Z5emxhWDNlMmxrWHd1Y1BfdUg4aDBDd2E5eEtqRkVGNEM5VkQyYndhNFYyUm9zcHM5aGEtYkZfakN4WllxcFhESXRxV08wQzY4LW5maEE4Slp5dGJncHBlY1ZkMjFwQW5GN01OdXF1RjdiaWdiSklMdVRmc0hEaGIwcXFWb3JXTHdn?oc=5",
+      "summary": "Colombia’s government sparks backlash with museum art purge &nbsp;&nbsp; NPR",
+      "published": "2026-10-27",
+      "source": "News headline / RSS snippet",
+      "topic": "Art & Art History",
+      "group": "general",
+      "headline": "Colombia’s government sparks backlash with museum art purge",
+      "brief": "Colombia's government has initiated a controversial purge of artworks from museums, provoking public backlash. The move raises concerns about cultural heritage preservation and governmental influence over artistic institutions.",
+      "why": "This story highlights tensions between political power and cultural institutions, relevant for understanding art history's societal context.",
+      "korean": "콜롬비아 정부의 미술관 작품 정리 조치가 반발을 불러일으켰습니다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Lessons from Chess: Mathematics in the Age of AI",
+      "url": "https://arxiv.org/abs/2611.30852v1",
+      "summary": "The history of chess offers a perspective on the growing role of artificial intelligence in mathematics. We explore the parallels and limitations of this analogy and consider possible directions for mathematical research, education, and the public perception of mathematics.",
+      "published": "2026-11-23",
+      "source": "arXiv preprint",
+      "topic": "Mathematics",
+      "group": "general",
+      "headline": "Lessons from Chess: Mathematics in the Age of AI",
+      "brief": "This perspective article explores parallels between the history of chess and the evolving role of artificial intelligence in mathematics. It discusses both the opportunities and limitations of AI in mathematical research, education, and public perception, drawing lessons from chess's integration with AI.",
+      "why": "It offers a rigorous reflection on AI's impact on mathematics, relevant for computational genomics researchers interested in AI/ML methods and scientific practice.",
+      "korean": "체스 역사를 통해 본 AI 시대 수학 연구와 교육에 대한 통찰을 제공합니다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Revealing Geometry under Strong Noise: Spectral Embeddings and Clustering via Random Geometric Graphs",
+      "url": "https://arxiv.org/abs/2611.31047v1",
+      "summary": "Modern massive datasets often contain useful low-dimensional nonlinear structures that are hidden by noise. Spectral embedding algorithms rely on meaningful local relationships between observations, but noise accumulated across many coordinates can make the observed distances unreliable. This also complicates clustering when groups have curved or concentric shapes and cannot be distinguished by their centers. In this paper, we develop a new method that denoises pairwise distances before using them to construct spectral embeddings and identify communities. Our approach uses cross-fitted projections to estimate distances between the underlying signals, selects a neighborhood radius from the observed sample, and builds a random geometric graph whose spectral coordinates represent the latent geometric structure. By connecting nearby points, such a geometric graph can distinguish different groups even when their centers coincide. A novel recursive procedure is then proposed to extract clusters from the graph using its spectral embeddings when such clusters exist. On the theoretical side, under a manifold model, we provide guarantees for our spectral embedding algorithm, which can be understood through the eigendecomposition of an integral operator associated with the underlying geometry. We show that the algorithm is robust to noise when the total noise energy is comparable to the total signal energy or, under additional conditions, exceeds it. To our knowledge, this is among the first spectral embedding algorithms that can handle such strong noise in datasets with nonlinear structures. In addition, our proposed clustering algorithm can recover the underlying clusters even when their centers coincide. Numerical studies demonstrate the superior performance of the proposed method in mitigating noise and revealing geometric structures for both spectral embedding and clustering.",
+      "published": "2026-11-23",
+      "source": "arXiv preprint",
+      "topic": "Mathematics",
+      "group": "general",
+      "headline": "Revealing geometry under strong noise via spectral embeddings and clustering with random geometric graphs",
+      "brief": "This work develops a method to denoise pairwise distances in high-dimensional data corrupted by strong noise before constructing spectral embeddings and clustering. Using cross-fitted projections and random geometric graphs, the approach recovers latent geometric structure and distinguishes clusters even when centers coincide. A recursive procedure extracts clusters from spectral embeddings. Theoretically, it provides guarantees on clustering accuracy and geometry recovery under noise.",
+      "why": "It advances spectral embedding and clustering methods robust to noise, broadly relevant to computational genomics and ML methods.",
+      "korean": "강한 잡음 속에서도 기하학적 구조와 클러스터를 복원하는 스펙트럼 임베딩 기법입니다.",
+      "evidence_note": ""
+    }
+  ]
+}
