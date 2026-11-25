@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-25",
+  "items": [
+    {
+      "title": "scPriorDiff: Bridging Single-Cell Modalities through Biological Network Prior-Guided Latent Diffusion.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43081916/",
+      "summary": "Journal: Bioinformatics (Oxford, England). Abstract: MOTIVATION: Single-cell multi-omics sequencing enables joint profiling of gene expression and chromatin accessibility, yet high-quality paired data remain scarce. Cross-modal translation based on generative modeling enables inference of an unmeasured modality from limited paired observations. However, substantial differences between gene expression and chromatin accessibility complicate cross-modal relationship modeling and the effective use of observed-modality information to guide target-modality generation. RESULTS: We propose scPriorDiff, a biological network prior-guided conditional latent diffusion model. scPriorDiff integrates diverse biological networks into a multimodal heterogeneous graph and employs a message-passing graph neural network (GNN) to learn biologically informed modality-specific representations that capture cross-modal and intra-modal relationships. To enable full-graph representation learning, a prior-regularized cross-modal completion module infers target-modality node representations during inference. The GNN-derived source representation conditions diffusion for target-modality generation. Across six paired single-cell multi-omics datasets, scPriorDiff outperformed eight representative methods and showed strong generalization across batches and to unseen cell types. Downstream analyses further demonstrated that the generated profiles preserved cell identities, molecular signatures, and biologically relevant functions. AVAILABILITY: The scPriorDiff software is publicly available at https://github.com/ChrisOliver2345/scPriorDiff and archived on Zenodo at https://doi.org/10.5281/zenodo.23408383. SUPPLEMENTARY INFORMATION: Supplementary data are available as a separate file.",
+      "published": "2026-11-24",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "scPriorDiff: Latent Diffusion Model Integrating Biological Networks for Single-Cell Multi-Omics",
+      "brief": "scPriorDiff is a conditional latent diffusion model guided by biological network priors, integrating diverse biological networks into a multimodal heterogeneous graph. It uses a message-passing graph neural network to learn modality-specific representations capturing cross-modal and intra-modal relationships, enabling inference of unmeasured modalities such as chromatin accessibility from gene expression data.",
+      "why": "This method advances computational genomics by effectively modeling cross-modal relationships in scarce paired single-cell multi-omics data, improving inference of missing modalities.",
+      "korean": "scPriorDiff는 생물학적 네트워크를 활용해 단일 세포 다중 오믹스 데이터의 결측 모달리티를 추론하는 잠재 확산 모델입니다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Learning Multimodal Representations from Partially Paired, Small-Scale Data",
+      "url": "https://arxiv.org/abs/2611.30601v2",
+      "summary": "Modeling multimodal data from partially paired samples is critical for advancing domains like biomedicine, where vast unimodal datasets and foundation models exist but paired data remains scarce. Existing fusion methods rely on large-scale paired datasets, limiting their use in scenarios with incomplete pairing. We introduce CAMEO, an adversarial learning-based modality fusion framework that integrates modalities from small, partially paired datasets. Combining any pre-trained unimodal encoder with a cross-modal latent alignment mechanism, CAMEO learns shared representations requiring only minimal paired samples. Evaluated on computational pathology tasks such as niche classification and cell type composition prediction, CAMEO achieves superior data efficiency, outperforming contrastive approaches like CLIP in low paired-data regimes, and highlighting the benefits of adversarial alignment when paired annotations are scarce. To facilitate further research, we additionally release a fully annotated HuggingFace dataset comprising three organs and paired image and gene expression modalities. By extending fusion methods to address limited pairing and small-scale datasets, we provide a framework that advances multimodal learning and broadens its applicability to real-world biomedical problems.",
+      "published": "2026-11-23",
+      "source": "arXiv preprint",
+      "topic": "Biological Foundation Models",
+      "group": "research",
+      "headline": "CAMEO: Adversarial Learning for Multimodal Representation from Partially Paired Small-Scale Biomedical Data",
+      "brief": "CAMEO is an adversarial learning framework that fuses modalities from small, partially paired biomedical datasets by combining pretrained unimodal encoders with cross-modal latent alignment. It achieves superior data efficiency and outperforms contrastive methods like CLIP in low paired-data regimes, demonstrated on computational pathology tasks including niche classification and cell type composition prediction.",
+      "why": "CAMEO provides a broadly transferable ML method for integrating multimodal biomedical data with limited paired samples, relevant for biological foundation models.",
+      "korean": "CAMEO는 적은 수의 짝지어진 데이터로부터 다중 모달 표현을 효과적으로 학습하는 적대적 학습 프레임워크입니다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "From WSIs to Bulk, Spatial and Single-Cell Transcriptomics via Multi-Scale Graph Neural Networks",
+      "url": "https://arxiv.org/abs/2610.41692v1",
+      "summary": "Understanding the spatial distribution of gene expression is key to studying complex diseases like cancer. While Spatial Transcriptomics (ST) and Single-Cell Transcriptomics (scT) provide high-resolution insights, they remain expensive and scarce. In contrast, standard histopathology Whole-Slide Images (WSIs) paired with bulk RNA sequencing are widely available. This work introduces a Multi-Scale Graph Neural Network (GNN) capable of simultaneously predicting bulk, spatial, and single-cell transcriptomics directly from WSIs. By extracting morphological features using a Pathology Foundation Model (PFM) (UNI2-h) and constructing spatial graphs at both patch and cell levels, the model learns the hierarchical relationships within the tissue. The network is trained on a combined dataset of The Cancer Genome Atlas Program (TCGA), Visium, and Xenium samples across lung, kidney, and breast tissues. A hybrid training strategy is employed, leveraging direct supervision alongside weakly supervised consistency losses to ensure predictions align across biological scales. Results show the model accurately predicts gene expression at the slide level and moderately at the patch level (strongest on Xenium), and achieves moderate correlation at the challenging single-cell level. Furthermore, downstream tasks explore the clinical relevance of these predictions, demonstrating their utility in survival analysis, spatial hazard mapping, and tumor classification via molecular signatures.",
+      "published": "2026-10-30",
+      "source": "arXiv preprint",
+      "topic": "Biological Foundation Models",
+      "group": "research",
+      "headline": "Multi-Scale Graph Neural Network Predicts Bulk, Spatial, and Single-Cell Transcriptomics from Histopathology Images",
+      "brief": "This study introduces a multi-scale graph neural network that predicts bulk, spatial, and single-cell transcriptomics directly from whole-slide histopathology images. Using morphological features and spatial graphs at patch and cell levels, the model learns hierarchical tissue relationships and is trained on combined datasets across multiple tissues. It achieves accurate transcriptomic predictions, enabling integrative analysis without costly molecular assays.",
+      "why": "This approach exemplifies a biological foundation model that integrates imaging and transcriptomics, advancing computational genomics and spatial biology.",
+      "korean": "다중 스케일 그래프 신경망으로 조직 이미지에서 다양한 수준의 전사체를 예측합니다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Aortic stiffness and brain perfusion: a population-based study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43049101/",
+      "summary": "Journal: Scandinavian cardiovascular journal : SCJ. Abstract: OBJECTIVES: The objective was to examine the association of aortic stiffness and age with brain perfusion, brain structure, and cognitive function in a population-based sample. DESIGN: The sample included randomly selected descendants from a large community study. Aortic stiffness was assessed using carotid-femoral pulse wave velocity (CFPWV) measured by applanation tonometry. Brain perfusion and structural brain measures were obtained using magnetic resonance imaging, and cognitive performance was evaluated using standardized neuropsychological tests. Participants were stratified by the median CFPWV (≤ or >8.6 m/s) for comparison and associations were examined in multivariable regression analyses adjusted for age, sex, heart rate, mean arterial pressure, use of antihypertensive medication and CFPWV. RESULTS: The study included 269 subjects, average age 62 years. Participants with higher aortic stiffness (>8.6 m/s) were older, had higher heart rate, blood pressure, and more frequently used antihypertensive medication. Total brain, grey matter, and white matter perfusion were significantly lower in those with higher aortic stiffness. Relative brain volume was lower, and white matter hyperintensity (WMH) burden higher in unadjusted analyses, whereas cognitive performance did not differ. In multivariable models, increased aortic stiffness was independently associated with lower total brain perfusion, while chronological age was independently associated with lower brain volumes and greater WMH burden. CONCLUSIONS: These findings indicate that aortic stiffness and aging represent related but distinct contributors to brain health. Aortic stiffness was independently associated with reduced brain perfusion, whereas age was the dominant determinant of structural brain changes.",
+      "published": "2026-11-19",
+      "source": "PubMed citation",
+      "topic": "Neuroscience & Evolutionary Psychology",
+      "group": "general",
+      "headline": "Dual Orexin Receptor Antagonism Modulates Sleep During Nicotine Withdrawal in Mice",
+      "brief": "This study investigates the effect of suvorexant, a dual orexin receptor antagonist, on sleep disturbances during nicotine withdrawal in male and female mice. Using a noninvasive piezoelectric system, the authors show that suvorexant modulates sleep-wake behavior altered by nicotine abstinence, with distinct patterns observed between sexes.",
+      "why": "The work provides insight into neurobiological mechanisms of sleep regulation during nicotine withdrawal, relevant for neuroscience and behavioral studies.",
+      "korean": "이중 오렉신 수용체 길항제가 니코틴 금단 시 수면 변화를 조절합니다.",
+      "evidence_note": "Preclinical animal study; relevance is to neuroscience rather than genomics."
+    },
+    {
+      "title": "A Koashi--Imoto Criterion for Holevo-Rate Visible Compression",
+      "url": "https://arxiv.org/abs/2611.33129v1",
+      "summary": "For a finite memoryless quantum source whose encoder knows the sequence of classical labels, we determine when the Holevo rate is achievable with shared classical randomness and no shared entanglement. In the maximal Koashi--Imoto decomposition of the signal ensemble, this occurs exactly when each signal is pure on the quantum part of every sector it occupies. For qubits, this means that the signals are all pure or commute pairwise. If any occupied quantum part is mixed, every code with sufficiently small mean local error has rate bounded away from the Holevo information, uniformly in blocklength. To prove the converse, we apply Fawzi--Renner recovery to a hypothetical sequence of visible codes approaching the Holevo rate at vanishing local error, then invoke a decoupling bound of Baghali Khanian and Winter for blind compression.",
+      "published": "2026-11-24",
+      "source": "arXiv preprint",
+      "topic": "Physics",
+      "group": "general",
+      "headline": "Koashi–Imoto Criterion for Achieving Holevo-Rate Visible Compression of Quantum Sources",
+      "brief": "This theoretical work determines when the Holevo rate is achievable for visible compression of finite memoryless quantum sources with known classical labels. The criterion involves the purity of signals on the quantum part of each sector in the Koashi–Imoto decomposition. For qubits, this means signals are pure or commute pairwise. If any quantum part is mixed, codes with small error have rates bounded away from the Holevo information.",
+      "why": "This result clarifies fundamental limits in quantum information compression, relevant for biological foundation models involving quantum data representations.",
+      "korean": "홀베오율 달성을 위한 코아시-이모토 기준을 제시합니다.",
+      "evidence_note": ""
+    },
+    {
+      "title": "A note on slicing",
+      "url": "https://arxiv.org/abs/2611.32328v1",
+      "summary": "We give a short proof of Bourgain's slicing theorem with the explicit bound $L_K\\leq\\sqrt{5/π}$ for every convex body $K$. The argument combines the strong thin-shell inequality obtained from the moment-measure method of Chen and Klartag with an entropy estimate along Eldan's stochastic localization. The proof uses neither $M$-ellipsoid theory nor the reverse Santaló inequality.",
+      "published": "2026-11-24",
+      "source": "arXiv preprint",
+      "topic": "Mathematics",
+      "group": "general",
+      "headline": "Short Proof of Bourgain's Slicing Theorem with Explicit Bound",
+      "brief": "This paper provides a concise proof of Bourgain's slicing theorem, establishing an explicit bound on the isotropic constant of convex bodies. The argument combines a strong thin-shell inequality from the moment-measure method with an entropy estimate via stochastic localization, avoiding reliance on $M$-ellipsoid theory or the reverse Santaló inequality.",
+      "why": "The result offers a rigorous and explicit geometric bound relevant to high-dimensional data representations in computational genomics and ML.",
+      "korean": "부르갱 슬라이싱 정리를 명확한 경계와 함께 간단히 증명합니다.",
+      "evidence_note": ""
+    }
+  ]
+}
