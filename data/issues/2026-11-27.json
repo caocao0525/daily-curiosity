@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-27",
+  "items": [
+    {
+      "title": "An apicomplexan-specific foundation model improves prediction of regulatory genomic signals in Plasmodium falciparum.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43100331/",
+      "summary": "Journal: bioRxiv : the preprint server for biology. Abstract: Genomic foundation models learn transferable sequence representations through self-supervision, yet their practical value is contested. In data-rich mammalian genomes, task-specific models trained from scratch can match or exceed pretrained models on many regulatory prediction tasks. Whether self-supervised pretraining provides an advantage in small, data-sparse genomes has not been directly tested. We address this in the compact, 23Mbp, A/T-rich genome of the malaria parasite, Plasmodium falciparum . We trained a Genomic Pretrained Network (GPN) via masked-nucleotide reconstruction on 455 genome assemblies spanning 76 apicomplexan species. We then fine-tuned the model to predict a variety of epigenomic features in a held-out chromosome, including transcription factor binding sites, chromatin-accessibility, histone modifications, and 10 chromatin states. Pretraining followed by fine tuning improved prediction of most features, with most of the benefit concentrated on datasets with relatively little labeled data (fewer than 3,000 training examples). In contrast, a human-pretrained model transferred poorly, indicating that phylogenetically relevant pretraining, not foundation-model status alone, drives beneficial performance. Self-supervised pretraining on clade-specific assemblies is thus a practical route to data-efficient regulatory modeling in small genomes where training data is scarce.",
+      "published": "2026-11-16",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "Apicomplexan-specific genomic foundation model improves regulatory signal prediction in Plasmodium falciparum",
+      "brief": "Researchers trained a genomic pretrained network (GPN) on 455 apicomplexan genomes, including the malaria parasite Plasmodium falciparum, to predict epigenomic features such as transcription factor binding and chromatin states. Pretraining followed by fine-tuning improved prediction accuracy, especially for datasets with limited labeled data. This demonstrates the advantage of self-supervised pretraining in small, data-sparse genomes.",
+      "why": "This work shows that genomic foundation models can effectively learn transferable regulatory sequence representations in small, AT-rich genomes, advancing computational genomics in parasitic organisms relevant to infectious disease.",
+      "korean": "소규모 기생충 게놈에서 자기지도 사전학습이 조절 신호 예측을 향상시킴.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Regulatory grammar design of tissue-specific enhancers across species.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43100557/",
+      "summary": "Journal: bioRxiv : the preprint server for biology. Abstract: Enhancers encode tissue-specific gene expression through the combinatorial identity, number, and arrangement of transcription factor motifs, collectively known as regulatory grammar. However, existing deep-learning methods directly optimize nucleotide sequences, leaving enhancer regulatory grammar implicit. Here we introduce REgulatory Grammar Architecture via reinforcement Learning (REGAL), a framework that explicitly programs enhancer grammar under sequence-to-function oracles. REGAL generated tissue-specific enhancers across species using the same placement architecture with interchangeable oracles and motif vocabularies. Experimental validation and perturbation revealed that tissue specificity requires coordinated target-tissue activation and off-target repression, depends on both motif composition and spatial organization, and employs distinct regulatory strategies across tissues. REGAL-designed enhancers drove predicted lineage-specific expression in transgenic mouse embryos, outperformed a nucleotide-level optimizer in human cells, and matched or exceeded leading designs in zebrafish and Drosophila at notably shorter length. Together, these findings establish regulatory grammar as a programmable and experimentally testable substrate underlying enhancer design and specificity.",
+      "published": "2026-11-18",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "REGAL framework explicitly programs tissue-specific enhancer regulatory grammar across species",
+      "brief": "The REGAL method uses reinforcement learning to explicitly design enhancer regulatory grammar—combinatorial transcription factor motif arrangements—under sequence-to-function oracles. REGAL-generated enhancers across species showed tissue-specific expression patterns validated experimentally in mouse embryos. The study reveals that tissue specificity depends on coordinated activation and repression, motif composition, and spatial organization, with distinct regulatory strategies across tissues.",
+      "why": "By explicitly modeling enhancer grammar, REGAL advances understanding and design of tissue-specific regulatory elements, a key challenge in genomics and gene regulation.",
+      "korean": "REGAL은 조직 특이적 증강자 조절 문법을 명시적으로 설계하여 기능을 예측하고 검증함.",
+      "evidence_note": ""
+    },
+    {
+      "title": "Targeting bromodomain plant homeodomain finger transcription factor reverses melanoma immune evasion via the p53/PD‑L1 axis: A study integrating machine learning identification and methapyrilene repurposing.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43102068/",
+      "summary": "Journal: Molecular medicine reports. Abstract: Primary non‑response and acquired resistance limit immunotherapy efficacy in melanoma. Tumor‑cell transcriptional programs influence immune‑checkpoint signaling and susceptibility to T cell‑mediated killing. The present study aimed to identify actionable tumor‑intrinsic regulators of immune escape and evaluate their therapeutic tractability. Transcriptomic data from four melanoma immunotherapy datasets were integrated for differential expression analysis. Candidate genes were selected using three machine learning (ML) approaches. Subsequently, eight ML models and the SHapley Additive exPlanations analysis were used to prioritize response‑associated features. Pathway enrichment analysis explored biological pathways associated with the top‑ranked candidate gene. Drug‑gene interaction analysis, molecular docking and molecular dynamics simulations identified therapeutic candidates. Gene overexpression and knockdown models were established by plasmid and short hairpin RNA transfection, respectively. Colony‑formation, Transwell, western blotting, cellular thermal shift, drug affinity‑responsive target stability and T‑cell co‑culture assays were performed. Six feature genes were identified. Particularly, bromodomain plant homeodomain finger transcription factor (BPTF) ranked highest and was negatively associated with immune therapy response. BPTF‑high samples demonstrated negative enrichment of the p53 pathway. In vitro, BPTF overexpression notably promoted melanoma clonogenic growth and invasion, suppressed p53 signaling, increased mouse double minute 2 (MDM2) and programmed death‑ligand 1 (PD‑L1) expression, and impaired CD8+ T‑cell activation and cytotoxicity. BPTF knockdown produced reciprocal effects. Chromatin immunoprecipitation‑quantitative PCR and dual‑luciferase assays supported BPTF‑mediated repression of TP53 and activation of CD274. Methapyrilene demonstrated stable predicted binding to BPTF, increased BPTF thermal and proteolytic stability, and attenuated BPTF‑associated malignant and immune‑evasive phenotypes. The combination with PD‑L1 blockade enhanced tumor‑cell killing and T‑cell effector responses compared with either treatment alone. In conclusion, BPTF associates melanoma progression with immune escape through the p53/PD‑L1 axis. Methapyrilene interacts with BPTF and provides a lead scaffold for developing BPTF‑directed agents in combination with PD‑L1 blockade to overcome immunotherapy resistance in the future.",
+      "published": "2026-11-27",
+      "source": "PubMed citation",
+      "topic": "Genomics & Epigenomics",
+      "group": "research",
+      "headline": "Machine learning identifies bromodomain PHD finger transcription factor reversing melanoma immune evasion via p53/PD-L1 axis",
+      "brief": "Integrating transcriptomic data from melanoma immunotherapy datasets, researchers used multiple machine learning models and SHAP analysis to identify tumor-intrinsic regulators of immune escape. They prioritized a bromodomain plant homeodomain finger transcription factor as a key candidate. Molecular docking and dynamics simulations identified methapyrilene as a therapeutic candidate. Functional assays confirmed that targeting this factor reverses immune evasion through the p53/PD-L1 pathway.",
+      "why": "This study integrates ML and molecular modeling to identify and validate a novel transcription factor target that modulates melanoma immune evasion, advancing immunotherapy strategies.",
+      "korean": "기계학습으로 흑색종 면역회피를 조절하는 전사인자와 치료 후보를 규명함.",
+      "evidence_note": "Preprint status uncertain; experimental validation reported but details limited."
+    },
+    {
+      "title": "Local-Global Spherical Sliced Wasserstein Graph Kernel for Schizophrenia Identification.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42888839/",
+      "summary": "Journal: International journal of neural systems. Abstract: Accurate identification of schizophrenia (SZ) using functional connectivity (FC) is fundamentally challenged by the non-Euclidean geometry of neuroimaging data and information loss from arbitrary graph thresholding. To overcome these bottlenecks, this study proposes the local-global spherical sliced Wasserstein graph (LG-SSWG) kernel. By embedding FC profiles onto a hyperspherical manifold, the proposed framework utilizes geodesic optimal transport to construct a mathematically rigorous, positive-definite graph kernel. This threshold-free approach synergistically integrates macroscopic whole-brain topology and region-specific functional architectures. Evaluated on the public COBRE dataset, LG-SSWG achieves a superior 84% accuracy, significantly outperforming state-of-the-art baselines. Beyond predictive accuracy, the method exhibits strong clinical interpretability by identifying critical neuroanatomical biomarkers, particularly the left thalamus and right precuneus. Network analysis reveals pervasive functional hyperconnectivity within subcortical relays and cognitive networks in SZ patients. Notably, this hyperconnectivity correlates positively with PANSS positive symptom scores. Consequently, these altered thalamocortical and precuneus-anchored circuits indicate that SZ clinical symptoms may be closely associated with disrupted sensory gating and functional segregation. Ultimately, the LG-SSWG kernel provides a principled geometric learning tool that advances both the objective diagnosis and mechanistic understanding of schizophrenia.",
+      "published": "2026-10-17",
+      "source": "PubMed citation",
+      "topic": "Neuroscience & Evolutionary Psychology",
+      "group": "general",
+      "headline": "Local-global spherical sliced Wasserstein graph kernel achieves 84% accuracy in schizophrenia identification",
+      "brief": "The study proposes the LG-SSWG kernel, embedding functional connectivity profiles onto a hyperspherical manifold and using geodesic optimal transport to construct a positive-definite graph kernel. Evaluated on the COBRE dataset, it achieved 84% accuracy in schizophrenia classification, outperforming baselines. The method identifies clinically interpretable neuroanatomical biomarkers such as the left thalamus and right precuneus.",
+      "why": "This approach advances neuroimaging analysis by integrating geometric and functional information for improved schizophrenia diagnosis and interpretability.",
+      "korean": "뇌 기능 연결성 그래프 커널로 조현병 진단 정확도 84% 달성.",
+      "evidence_note": ""
+    }
+  ]
+}
